@@ -256,10 +256,13 @@ main:focus{outline:none}
 .stage:not(.gl-on) .stage-hint{visibility:hidden}
 .stage-hint{position:absolute;left:0;right:0;bottom:calc(22px + env(safe-area-inset-bottom,0px));margin:0;display:flex;justify-content:center;align-items:center;gap:12px;font-family:var(--f-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);pointer-events:none;z-index:1}
 .stage-hint i{width:3px;height:3px;border-radius:50%;background:currentColor}
-.hero-in{position:relative;z-index:2;min-height:max(680px,100vh);min-height:max(680px,100svh);display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,30vw) minmax(0,1fr);align-items:end;gap:24px;padding-top:calc(var(--hdr) + 40px);padding-bottom:calc(72px + env(safe-area-inset-bottom,0px));pointer-events:none}
+/* the middle column keeps clear of the hang tag, which is sized by the hero's height, so wide screens don't squeeze the copy */
+.hero-in{position:relative;z-index:2;min-height:max(680px,100vh);min-height:max(680px,100svh);display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,min(30vw,max(300px,44vh))) minmax(0,1fr);align-items:end;gap:24px;padding-top:calc(var(--hdr) + 40px);padding-bottom:calc(72px + env(safe-area-inset-bottom,0px));pointer-events:none}
 .hero-in > *{pointer-events:auto}
-.hero-copy{grid-column:1;display:grid;gap:20px;max-width:460px;justify-items:start}
+.hero-copy{grid-column:1;display:grid;gap:20px;max-width:460px;justify-items:start;container-type:inline-size}
 .hero-title{font-family:var(--f-display);font-weight:400;font-size:clamp(40px,4.4vw,76px);line-height:.92;text-transform:uppercase;margin:0;display:grid}
+/* the longest line ("Styled to") is 5.6em wide, so 17cqi keeps every line inside the column */
+@supports (font-size:1cqi){.hero-title{font-size:clamp(40px,min(4.4vw,17cqi),76px)}}
 .hero-title .ln{display:block;overflow:hidden;padding-bottom:.04em}
 .hero-title .ln > span{display:block}
 .hero-title .o{color:transparent;-webkit-text-stroke:1.2px var(--chalk)}
@@ -589,7 +592,7 @@ main:focus{outline:none}
 .ftr-grid a:hover{color:var(--chalk)}
 .wa-num{font-family:var(--f-mono);font-size:20px;user-select:all;margin:0}
 .ftr-acts{display:flex;gap:18px;flex-wrap:wrap;margin-top:14px}
-.ftr-base{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:50px;font-size:13px;color:var(--dim)}
+.ftr-base{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-top:50px;font-size:13px;color:var(--dim)}
 .ftr-base a{color:var(--mute);display:inline-block;padding-block:6px}
 
 /* floating cart pill: also confirms each add */
@@ -1446,6 +1449,14 @@ main:focus{outline:none}
     addToCart(current, s, 1, $("#stage"));
   });
   const stageLabel = id => `${P[id].name} hang tag. Drag or use the arrow keys to spin it, press Enter to flip it.`;
+  // the stage is a focusable 3D viewer only while the hang tag runs; the flat photo is just an image
+  function syncStage() {
+    const st = $("#stage"), gl = st.classList.contains("gl-on");
+    st.setAttribute("aria-label", gl ? stageLabel(current) : `${P[current].name} gym shorts`);
+    if (gl) { st.tabIndex = 0; st.setAttribute("aria-roledescription", "3D viewer"); st.dataset.cursor = "Drag to spin"; }
+    else { st.removeAttribute("tabindex"); st.removeAttribute("aria-roledescription"); st.removeAttribute("data-cursor"); }
+  }
+  window.__fdnStage = syncStage;
   // flat photo, only loaded when the 3D tag can't run (no WebGL, or the page opened straight from disk)
   let fbImg = null;
   window.__fdnFallback = () => {
@@ -1457,8 +1468,7 @@ main:focus{outline:none}
       $(".tag-fallback", st).appendChild(fbImg);
     }
     fbImg.src = P[current].hero;
-    st.removeAttribute("data-cursor");
-    st.setAttribute("aria-label", `${P[current].name} gym shorts`);
+    syncStage();
   };
   function setProduct(id) {
     if (!P[id] || id === current) return;
@@ -1466,7 +1476,7 @@ main:focus{outline:none}
     $$("#buybox .cw button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.p === id)));
     renderBuybox();
     if (fbImg) fbImg.src = P[id].hero;
-    $("#stage").setAttribute("aria-label", stageLabel(id));
+    syncStage();
     if (hasGsap && !reduce) gsap.fromTo([bb.name, bb.price], { y: 10, opacity: 0 }, { y: 0, opacity: 1, duration: .5, stagger: .05, ease: "expo.out" });
     window.__fdnCurrent = id;
     dispatchEvent(new CustomEvent("fdn:product", { detail: id }));
@@ -3016,6 +3026,7 @@ function hero() {
     resize();
     glReady = true;
     host.classList.add("gl-on");
+    window.__fdnStage && window.__fdnStage();
     if (window.__fdnIntro) startIntro();
     start();
     ready();
@@ -3162,9 +3173,10 @@ function cloth(host) {
   let colTarget = uni.uColor.value.clone();
   addEventListener("fdn:cloth", e => { if (COLORS[e.detail]) { colTarget = COLORS[e.detail].clone(); uni.uPower.value = 1; uni.uPointer.value.set(0, 0); if (reduce) frame(); } });
 
-  let on = false;
+  let on = false, raf = 0;
   const clock = new THREE.Clock();
   function frame() {
+    raf = 0;
     const t = reduce ? 2 : clock.getElapsedTime();
     uni.uTime.value = t;
     uni.uPower.value *= .975;
@@ -3173,9 +3185,10 @@ function cloth(host) {
     mesh.rotation.x += (-.3 + rx - mesh.rotation.x) * .04;
     mesh.position.y = Math.sin(t * .7) * .05;
     renderer.render(scene, cam);
-    if (on && !reduce) requestAnimationFrame(frame);
+    if (on && !reduce) raf = requestAnimationFrame(frame);
   }
-  visible(host, v => { if (v && !on) { on = true; frame(); } else if (!v) on = false; });
+  // one loop at a time, even if the section leaves and comes back within a frame
+  visible(host, v => { on = v; if (v && !raf) frame(); });
   frame();
 }
 </script>
