@@ -46,7 +46,7 @@
         "https://www.instagram.com/fidential_official/",
         "https://www.facebook.com/profile.php?id=61595495987209"
       ],
-      "contactPoint": { "@type": "ContactPoint", "telephone": "+94-77-295-2492", "contactType": "customer service", "areaServed": "LK" }
+      "contactPoint": { "@type": "ContactPoint", "telephone": "+94-77-931-3890", "contactType": "customer service", "areaServed": "LK" }
     },
     {
       "@type": "WebSite",
@@ -235,7 +235,7 @@ main:focus{outline:none}
 .menu-btn{display:none;height:40px;padding:0 14px;border:1px solid var(--line-2);font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase}
 .menu{position:fixed;inset:0;z-index:55;background:var(--ink);padding:calc(var(--hdr) + 36px + env(safe-area-inset-top,0px)) var(--gut-r) calc(32px + env(safe-area-inset-bottom,0px)) var(--gut-l);display:flex;flex-direction:column;gap:2px;overflow:auto}
 .menu > a{font-family:var(--f-display);font-size:clamp(40px,12vw,72px);line-height:1.08;text-decoration:none;text-transform:uppercase;animation:menuIn .6s var(--ease) both}
-.menu > a:nth-child(2){animation-delay:.04s}.menu > a:nth-child(3){animation-delay:.08s}.menu > a:nth-child(4){animation-delay:.12s}.menu > a:nth-child(5){animation-delay:.16s}.menu > a:nth-child(6){animation-delay:.2s}
+.menu > a:nth-child(2){animation-delay:.04s}.menu > a:nth-child(3){animation-delay:.08s}.menu > a:nth-child(4){animation-delay:.12s}.menu > a:nth-child(5){animation-delay:.16s}.menu > a:nth-child(6){animation-delay:.2s}.menu > a:nth-child(7){animation-delay:.24s}
 .menu-foot{margin-top:auto;padding-top:24px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
 .soc-row{display:flex;gap:8px}
 .soc-row a{width:44px;height:44px;display:grid;place-items:center;border:1px solid var(--line-2);transition:background .3s,color .3s,border-color .3s}
@@ -709,6 +709,91 @@ main:focus{outline:none}
 .tagspecs span{font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
 .tagspecs b{font-weight:600;font-size:14px}
 
+/* 11.11 sale: one warm accent, used sparingly. Everything here is hidden again once the sale ends */
+:root{--sale:#ff5a36;--sale-soft:#ffb39f;--sale-bg:rgba(255,90,54,.12)}
+.sale-dot{width:7px;height:7px;flex:none;border-radius:50%;background:var(--sale);animation:salePulse 2.2s ease-out infinite}
+.sale-dot.ok{background:var(--wa);animation:none}
+@keyframes salePulse{0%{box-shadow:0 0 0 0 rgba(255,90,54,.55)}70%,100%{box-shadow:0 0 0 8px rgba(255,90,54,0)}}
+.was{color:var(--dim);font-size:.8em;text-decoration-thickness:1px}
+.bb-row:has(.was),.card-top:has(.was){align-items:flex-end}
+.bb-price .was,.card-price .was{display:block;font-size:11px;line-height:1.5;text-align:right}
+.pm-price .was{margin-right:6px}
+.tot .was{font-size:13px;margin-right:6px}
+.nav a.nav-sale{display:inline-flex;align-items:center;gap:8px;color:var(--chalk)}
+.menu > a.menu-sale{display:flex;align-items:center;gap:16px}
+.menu-sale .sale-dot{width:10px;height:10px}
+.sale-on .hero::before{content:"";position:absolute;left:0;right:0;bottom:0;height:60%;background:radial-gradient(50% 60% at 50% 100%,rgba(255,90,54,.09),transparent 70%);pointer-events:none}
+.stage-1111{position:absolute;left:50%;top:50%;translate:-50% -54%;font-family:var(--f-display);font-size:min(24vw,50vh);line-height:1;white-space:nowrap;color:transparent;-webkit-text-stroke:1px rgba(240,240,234,.1);-webkit-mask-image:linear-gradient(90deg,transparent,#000 28%,#000 72%,transparent);mask-image:linear-gradient(90deg,transparent,#000 28%,#000 72%,transparent);pointer-events:none;-webkit-user-select:none;user-select:none}
+.sale-chip{display:inline-flex;align-items:center;gap:10px;min-height:34px;padding:4px 4px 4px 12px;border:1px solid rgba(255,90,54,.38);background:linear-gradient(90deg,var(--sale-bg),rgba(255,90,54,0) 85%);font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;color:var(--chalk);transition:border-color .3s}
+.sale-chip b{font-weight:500;padding:5px 8px;background:var(--chalk);color:var(--ink);letter-spacing:.06em;font-variant-numeric:tabular-nums;white-space:nowrap}
+@media (hover:hover){.sale-chip:hover{border-color:var(--sale)}}
+.deal-line{display:flex;align-items:center;gap:10px;margin:0;font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;line-height:1.4;text-transform:uppercase;color:var(--sale-soft);text-decoration:none}
+.deal-line b{color:var(--chalk);font-weight:500}
+.card-sale{position:absolute;right:14px;top:14px;display:inline-flex;align-items:center;gap:8px;padding:6px 9px;background:rgba(7,7,7,.66);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+.sale{position:relative;overflow:hidden;padding-bottom:clamp(84px,10vw,150px);background:radial-gradient(55% 65% at 82% 62%,rgba(255,90,54,.07),transparent 70%)}
+.sale-strip{overflow:hidden;border-bottom:1px solid var(--line);margin-bottom:clamp(60px,8vw,110px);-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.sale-strip-in{display:flex;width:max-content;animation:saleMarq 60s linear infinite}
+.sale-strip-in > span{display:inline-flex;align-items:center;gap:22px;padding:15px 11px;font-family:var(--f-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--mute);white-space:nowrap}
+.sale-strip-in b{font-weight:500;color:var(--chalk)}
+.sale-strip-in i{width:5px;height:5px;border-radius:50%;background:var(--sale)}
+@media (hover:hover){.sale-strip:hover .sale-strip-in{animation-play-state:paused}}
+@keyframes saleMarq{to{transform:translateX(-50%)}}
+.sale-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:clamp(40px,6vw,100px);align-items:end}
+.sale-head{display:grid;gap:22px;justify-items:start}
+.sale-eb{display:flex;align-items:center;gap:12px}
+.sale-title{margin:0;display:grid;font-family:var(--f-display);font-weight:400;line-height:.84;text-transform:uppercase}
+.sale-title .o{font-size:clamp(84px,12vw,196px);color:transparent;-webkit-text-stroke:1.5px var(--chalk)}
+.sale-sub{font-size:clamp(30px,3.6vw,56px);line-height:1;margin-top:.14em}
+.sale-head .lede b{color:var(--chalk);font-weight:600;white-space:nowrap}
+.cd-wrap{display:grid;gap:10px}
+.cd{display:flex;gap:6px}
+.cd > span{display:grid;justify-items:center;gap:6px;min-width:64px;padding:12px 6px 10px;border:1px solid var(--line-2);background:var(--ink-2)}
+.cd b{display:block;height:1.15em;overflow:hidden;font-family:var(--f-mono);font-weight:500;font-size:30px;line-height:1.15;font-variant-numeric:tabular-nums}
+.cd b i{display:block;font-style:normal}
+.cd small{font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.sale-ctas{display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+.offers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.offer{--mx:50%;--my:0%;position:relative;display:flex;flex-direction:column;gap:14px;padding:clamp(20px,2vw,28px);border:1px solid var(--line-2);background:var(--ink-2);overflow:hidden;isolation:isolate;transition:border-color .4s;container-type:inline-size}
+.offer::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(380px circle at var(--mx) var(--my),rgba(255,90,54,.16),transparent 65%);opacity:0;transition:opacity .5s}
+@media (hover:hover){.offer:hover::before{opacity:1}.offer:hover{border-color:rgba(240,240,234,.5)}}
+.offer.best{border-color:rgba(240,240,234,.55);background:linear-gradient(160deg,#161617,var(--ink-2) 60%)}
+.offer-top{display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:26px}
+.offer-badge{padding:5px 9px;background:var(--sale);color:#1a0600;font-family:var(--f-mono);font-size:10px;font-weight:500;letter-spacing:.14em;text-transform:uppercase}
+.offer h3{margin:0 0 18px;font-family:var(--f-display);font-weight:400;font-size:clamp(24px,2.3vw,34px);line-height:.95;text-transform:uppercase}
+.offer-was{margin:0;font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+.offer-was s{color:var(--mute);text-decoration-thickness:1px}
+.offer-now{margin:0;display:grid;gap:6px;justify-items:start;font-family:var(--f-display);font-size:clamp(34px,3.6vw,56px);line-height:.9;white-space:nowrap}
+/* "Rs. 3,999" is 5.1em wide, so 18.5cqi keeps the price on one line inside its card */
+@supports (font-size:1cqi){.offer-now{font-size:clamp(34px,18.5cqi,64px)}}
+.offer > .btn,.offer-go{margin-top:auto}
+.offer-now small{font-family:var(--f-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--sale-soft)}
+.offer-now em{font-style:normal;font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase}
+.offer-save{margin:0;width:max-content;padding:7px 10px;background:var(--sale-bg);border:1px solid rgba(255,90,54,.3);color:var(--sale-soft);font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+.offer-go{align-self:flex-start}
+.shine{background:linear-gradient(105deg,var(--chalk) 42%,#fff 47%,#ffcfc0 50%,#fff 53%,var(--chalk) 58%) 0 0/300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 5.5s ease-in-out infinite}
+@keyframes shine{0%,55%{background-position:100% 0}100%{background-position:0 0}}
+.pair{display:grid;gap:12px;padding-top:16px;border-top:1px solid var(--line)}
+.pair-row{display:grid;grid-template-columns:auto auto minmax(0,1fr);gap:12px;align-items:center}
+.pair-n{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;color:var(--dim)}
+.pair-cols{display:flex;gap:8px}
+.pair-cols button{position:relative;width:30px;height:30px;border-radius:50%;background:var(--sw);box-shadow:inset 0 0 0 1px rgba(240,240,234,.35);transition:box-shadow .25s}
+.pair-cols button::after{content:"";position:absolute;inset:-7px}
+.pair-cols button[aria-pressed="true"]{box-shadow:inset 0 0 0 1px rgba(240,240,234,.35),0 0 0 3px var(--ink-2),0 0 0 4px var(--chalk)}
+.pair .sizes{flex-wrap:nowrap;gap:6px}
+.pair .size{flex:1;min-width:0;height:42px;padding:0 6px;font-size:14px}
+.pair .size small{display:none}
+.nudge{display:flex;flex-wrap:wrap;align-items:center;gap:8px 11px;padding:12px 14px;border:1px dashed rgba(255,90,54,.4);background:rgba(255,90,54,.06);font-size:13px;line-height:1.4}
+.nudge > span:not(.nudge-acts){flex:1;min-width:0}
+.nudge-acts{display:flex;gap:18px;width:100%;padding:4px 0 2px 18px}
+.sale-row b{color:var(--sale-soft)}
+@media (max-width:1023px){.sale-grid{grid-template-columns:minmax(0,1fr);align-items:start}}
+@media (max-width:640px){
+  .offers{grid-template-columns:minmax(0,1fr)}
+  .cd > span{min-width:0;flex:1}
+  .cd b{font-size:24px}
+  .card-sale{right:10px;top:10px}
+}
+
 /* responsive */
 @media (max-width:1100px){
   .steps{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -804,7 +889,7 @@ main:focus{outline:none}
 
 <div id="loader" aria-hidden="true">
   <div class="ld-word"><span class="ld-con" id="ldCon">CON</span><span id="ldFid">FIDENTIAL</span></div>
-  <div class="ld-meta"><span>Built to perform</span><span id="ldPct">000</span></div>
+  <div class="ld-meta"><span id="ldTag">Built to perform</span><span id="ldPct">000</span></div>
 </div>
 
 <div class="cursor" id="cursor" aria-hidden="true"></div>
@@ -814,6 +899,7 @@ main:focus{outline:none}
   <div class="wrap hdr-in">
     <a class="brand" href="#top" aria-label="FIDENTIAL, back to top"><img src="img/logo_white.png" alt="FIDENTIAL" width="1271" height="148"></a>
     <nav class="nav" aria-label="Main">
+      <a class="nav-sale" href="#sale" data-when="teaser live" hidden><i class="sale-dot"></i>11.11</a>
       <a href="#shop">Shop</a>
       <a href="#fabric">Fabric</a>
       <a href="#fit">Fit</a>
@@ -829,6 +915,7 @@ main:focus{outline:none}
 </header>
 
 <nav class="menu" id="menu" aria-label="Menu" hidden>
+  <a class="menu-sale" href="#sale" data-when="teaser live" hidden>11.11 Sale<i class="sale-dot"></i></a>
   <a href="#shop">Shop</a>
   <a href="#fabric">Fabric</a>
   <a href="#fit">Fit</a>
@@ -845,11 +932,13 @@ main:focus{outline:none}
 
   <section class="hero" id="hero" aria-label="FIDENTIAL gym shorts">
     <div class="stage" id="stage" tabindex="0" role="group" aria-roledescription="3D viewer" aria-label="Black Panther hang tag. Drag or use the arrow keys to spin it, press Enter to flip it." data-cursor="Drag to spin">
+      <span class="stage-1111" aria-hidden="true" data-when="teaser live" hidden>11.11</span>
       <div class="tag-fallback" aria-hidden="true"></div>
       <p class="stage-hint" aria-hidden="true"><span>Drag to spin</span><i></i><span>Tap to flip</span></p>
     </div>
     <div class="wrap hero-in">
       <div class="hero-copy">
+        <a class="sale-chip" href="#sale" data-when="teaser live" hidden><i class="sale-dot"></i><span data-deal="chip">11.11 Special Sale</span><b data-cd="short" aria-hidden="true"></b></a>
         <h1 class="hero-title"><span class="eyebrow">Premium gym shorts · Sri Lanka</span> <span class="ln"><span>Built to</span></span> <span class="ln"><span>perform.</span></span> <span class="ln"><span class="o">Styled to</span></span> <span class="ln"><span class="o">last.</span></span></h1>
         <p class="hero-sub">Scuba-fabric gym shorts with an elastic waistband and an adjustable drawstring.</p>
         <div class="hero-ctas">
@@ -863,6 +952,7 @@ main:focus{outline:none}
           <button type="button" aria-pressed="false" data-p="blue-sky"><i class="sw" style="--sw:#24368e"></i>Blue Sky</button>
         </div>
         <div class="bb-row"><p class="bb-name" id="bbName">Black Panther</p><p class="bb-price" id="bbPrice">LKR 2,900</p></div>
+        <a class="deal-line" href="#sale" data-deal="line" data-when="teaser live" hidden></a>
         <div class="sizes" id="bbSizes" role="radiogroup" aria-label="Size"></div>
         <p class="stock-note" id="bbStock" aria-live="polite"></p>
         <button class="btn btn-solid btn-wide" id="bbAdd" type="button">Add to cart</button>
@@ -877,6 +967,58 @@ main:focus{outline:none}
       <li><span>03</span>Adjustable drawstring</li>
       <li><span>04</span>Order on WhatsApp</li>
     </ul>
+  </section>
+
+  <section class="sale" id="sale" aria-labelledby="saleTitle" data-when="teaser live" hidden>
+    <div class="sale-strip" aria-hidden="true"><div class="sale-strip-in" id="saleStrip"></div></div>
+    <div class="wrap sale-grid">
+      <div class="sale-head" data-reveal>
+        <p class="eyebrow sale-eb"><i class="sale-dot"></i><span data-deal="when">11–13 November · Three days only</span></p>
+        <h2 class="sale-title" id="saleTitle"><span class="o">11.11</span><span class="sale-sub">Special sale</span></h2>
+        <p class="lede">Any colour, any size. Pick one for <b data-sp="one">Rs. 2,499</b>, or mix two pairs and pay <b data-sp="two">Rs. 3,999</b> for both.</p>
+        <div class="cd-wrap">
+          <p class="mono" data-deal="cd-label">Starts in</p>
+          <div class="cd" data-cd="full" aria-hidden="true">
+            <span><b data-u="d"><i>00</i></b><small>Days</small></span>
+            <span><b data-u="h"><i>00</i></b><small>Hrs</small></span>
+            <span><b data-u="m"><i>00</i></b><small>Min</small></span>
+            <span><b data-u="s"><i>00</i></b><small>Sec</small></span>
+          </div>
+          <p class="sr" data-deal="cd-sr"></p>
+        </div>
+        <div class="sale-ctas" data-when="teaser" hidden>
+          <a class="btn btn-wa" id="saleEarly" href="https://wa.me/94779313890" target="_blank" rel="noopener"><span>Get it first on WhatsApp</span></a>
+          <button class="link-btn" type="button" id="saleCal">Add to calendar</button>
+        </div>
+        <div class="sale-ctas" data-when="live" hidden>
+          <a class="btn btn-solid" href="#shop">Shop the sale</a>
+        </div>
+      </div>
+      <div class="offers">
+        <article class="offer" data-reveal>
+          <div class="offer-top"><span class="mono">Offer 01</span></div>
+          <h3>Buy 1 short</h3>
+          <p class="offer-was">Regular price <s data-sp="was1">Rs. 2,900</s></p>
+          <p class="offer-now"><small>Now</small><span class="shine" data-sp="one">Rs. 2,499</span></p>
+          <p class="offer-save">You save <span data-sp="save1">Rs. 401</span></p>
+          <a class="link-btn offer-go" href="#shop" data-when="live" hidden>Shop now</a>
+        </article>
+        <article class="offer best" data-reveal>
+          <div class="offer-top"><span class="mono">Offer 02</span><span class="offer-badge">Best value</span></div>
+          <h3>Buy 2 shorts</h3>
+          <p class="offer-was">Regular price <s data-sp="was2">Rs. 5,800</s></p>
+          <p class="offer-now"><small>Now</small><span class="shine" data-sp="two">Rs. 3,999</span><em>For both!</em></p>
+          <p class="offer-save">You save <span data-sp="save2">Rs. 1,801</span></p>
+          <button class="btn btn-solid btn-wide" type="button" id="pairOpen" data-when="live" aria-expanded="false" aria-controls="pair" hidden>Build your pair</button>
+          <div class="pair" id="pair" hidden>
+            <div class="pair-row"><span class="pair-n">01</span><div class="pair-cols" role="group" aria-label="First pair colour"></div><div class="sizes" role="radiogroup" aria-label="First pair size"></div></div>
+            <div class="pair-row"><span class="pair-n">02</span><div class="pair-cols" role="group" aria-label="Second pair colour"></div><div class="sizes" role="radiogroup" aria-label="Second pair size"></div></div>
+            <p class="stock-note" id="pairNote" aria-live="polite"></p>
+            <button class="btn btn-solid btn-wide" type="button" id="pairAdd">Add both · <span data-sp="two">Rs. 3,999</span></button>
+          </div>
+        </article>
+      </div>
+    </div>
   </section>
 
   <section class="sec shop" id="shop" aria-labelledby="shopTitle">
@@ -1109,7 +1251,7 @@ main:focus{outline:none}
               </div>
             </div>
             <p class="rv-err" id="rvErr" role="alert" hidden></p>
-            <div class="rv-alert" id="rvAlert" role="alert" hidden><p id="rvAlertMsg"></p><a class="btn btn-wa" id="rvAlertWa" href="https://wa.me/94772952492" target="_blank" rel="noopener"><span>Send it on WhatsApp instead</span></a></div>
+            <div class="rv-alert" id="rvAlert" role="alert" hidden><p id="rvAlertMsg"></p><a class="btn btn-wa" id="rvAlertWa" href="https://wa.me/94779313890" target="_blank" rel="noopener"><span>Send it on WhatsApp instead</span></a></div>
             <div class="rv-nav">
               <button class="link-btn" type="button" id="rvBack" hidden>Back</button>
               <button class="link-btn" type="button" id="rvSkip" hidden>Skip</button>
@@ -1163,10 +1305,10 @@ main:focus{outline:none}
     <div class="ftr-grid">
       <div>
         <p class="mono">Orders and questions</p>
-        <p class="wa-num" id="waNum">+94 77 295 2492</p>
+        <p class="wa-num" id="waNum">+94 77 931 3890</p>
         <div class="ftr-acts">
           <button class="link-btn" type="button" id="copyNum">Copy number</button>
-          <a class="link-btn" id="waChat" href="https://wa.me/94772952492" target="_blank" rel="noopener">Chat on WhatsApp</a>
+          <a class="link-btn" id="waChat" href="https://wa.me/94779313890" target="_blank" rel="noopener">Chat on WhatsApp</a>
         </div>
       </div>
       <div>
@@ -1221,6 +1363,8 @@ main:focus{outline:none}
         </div>
       </div>
       <div class="dr-foot" id="bagFoot">
+        <div class="nudge" id="bagDeal" hidden></div>
+        <div class="sum-row sale-row" data-disc hidden><span>11.11 sale</span><b></b></div>
         <div class="tot"><span>Subtotal</span><span data-total>LKR 0</span></div>
         <p class="fine">Delivery charges and payment are confirmed with you on WhatsApp.</p>
         <button class="btn btn-solid btn-wide" id="toDetails" type="button">Check out</button>
@@ -1246,8 +1390,9 @@ main:focus{outline:none}
         </div>
       </div>
       <div class="dr-foot">
+        <div class="sum-row sale-row" data-disc hidden><span>11.11 sale</span><b></b></div>
         <div class="tot"><span>Total</span><span data-total>LKR 0</span></div>
-        <a class="btn btn-wa btn-wide" id="waBtn" href="https://wa.me/94772952492" target="_blank" rel="noopener">
+        <a class="btn btn-wa btn-wide" id="waBtn" href="https://wa.me/94779313890" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.18 8.18 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.43-.06-.13-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43h-.48a.92.92 0 0 0-.66.31c-.23.25-.87.85-.87 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.29Z"/></svg>
           <span>Send order on WhatsApp</span>
         </a>
@@ -1260,7 +1405,7 @@ main:focus{outline:none}
           <h3 tabindex="-1" data-focus>Ready in WhatsApp</h3>
           <p>Order <b id="sentNo"></b> is written in for you. Tap send in WhatsApp to place it and we'll reply to confirm delivery and payment.</p>
           <div class="sent-actions">
-            <a class="btn btn-wa btn-wide" id="sentWa" href="https://wa.me/94772952492" target="_blank" rel="noopener">Open WhatsApp again</a>
+            <a class="btn btn-wa btn-wide" id="sentWa" href="https://wa.me/94779313890" target="_blank" rel="noopener">Open WhatsApp again</a>
             <button class="btn btn-wide" type="button" id="copyOrder">Copy order text</button>
           </div>
           <div class="sent-links"><button class="link-btn" type="button" id="editOrder">Edit order</button><button class="link-btn" type="button" id="newOrder">Start a new order</button></div>
@@ -1282,6 +1427,7 @@ main:focus{outline:none}
       <p class="eyebrow" id="pmIdx">01 · Black</p>
       <h3 class="pm-name" id="pmName">Black Panther</h3>
       <p class="pm-price" id="pmPrice">LKR 2,900</p>
+      <p class="deal-line" data-deal="line" data-when="teaser live" hidden></p>
       <p class="pm-rate" id="pmRate" hidden></p>
       <p class="pm-desc" id="pmDesc"></p>
       <div class="pm-lbl"><span class="mono">Choose your size</span><button class="link-btn" type="button" id="pmGuideBtn" aria-expanded="false" aria-controls="pmGuide">Size guide</button></div>
@@ -1314,7 +1460,7 @@ main:focus{outline:none}
 (() => {
   /* ===== Store settings: edit these to update the shop ===== */
   const STORE = {
-    whatsapp: "94772952492",          // FIDENTIAL WhatsApp, country code + number, no "+" or spaces
+    whatsapp: "94779313890",          // FIDENTIAL WhatsApp, country code + number, no "+" or spaces
     products: {
       "black-panther": {
         name: "Black Panther", idx: "01", colour: "Black", swatch: "#161616", price: 2900,
@@ -1334,6 +1480,9 @@ main:focus{outline:none}
       }
     },
     sizes: { S: { waist: "28–30", length: "15" }, M: { waist: "32–34", length: "16" }, L: { waist: "36–38", length: "16.5" } },
+    // 11.11 sale. Before "starts" the site shows a teaser with a countdown; from "starts" to "ends" the cart charges
+    // "one" for a single short and "two" for each pair (any colours and sizes); after "ends" everything goes back to normal.
+    sale: { starts: "2026-11-11T00:00:00+05:30", ends: "2026-11-14T00:00:00+05:30", dates: "11–13 November", one: 2499, two: 3999 },
     reviews: {
       // Your Formspree form ID (like "xqakzwvb") or its full endpoint. Left empty, reviews are sent on WhatsApp instead.
       formspree: "meaalldw",
@@ -1372,6 +1521,24 @@ main:focus{outline:none}
     return r.n ? `<a class="card-rate" href="#reviews" data-rv="${id}" aria-label="${P[id].name}: rated ${r.avg.toFixed(1)} out of 5 from ${n}"><span class="stars" style="--v:${r.avg.toFixed(2)}">${starsHTML()}</span>${r.avg.toFixed(1)} · ${n}</a>` : "";
   };
 
+  /* ===== 11.11 sale: teaser → live → off, by the clock. Off the live domain, ?sale=teaser|live|off previews a state ===== */
+  const SALE = STORE.sale || null;
+  const SALE_START = SALE ? Date.parse(SALE.starts) : 0, SALE_END = SALE ? Date.parse(SALE.ends) : 0;
+  const forcedSale = !/(^|\.)fidential\.shop$/.test(location.hostname) && new URLSearchParams(location.search).get("sale");
+  const phaseNow = () => !SALE ? "off" : ["teaser", "live", "off"].includes(forcedSale) ? forcedSale : Date.now() < SALE_START ? "teaser" : Date.now() < SALE_END ? "live" : "off";
+  let salePhase = phaseNow();
+  const saleLive = () => salePhase === "live";
+  const rs = n => "Rs. " + nf.format(n);
+  // what a set of cart lines costs: regular prices, or while the sale is live, each pair at SALE.two and an odd one out at SALE.one
+  function priceOf(list) {
+    const regular = list.reduce((a, l) => a + P[l.id].price * l.qty, 0);
+    if (!saleLive()) return { regular, total: regular, pairs: 0, singles: 0 };
+    const n = list.reduce((a, l) => a + l.qty, 0), pairs = Math.floor(n / 2), singles = n % 2;
+    return { regular, total: pairs * SALE.two + singles * SALE.one, pairs, singles };
+  }
+  const priceHTML = id => saleLive() ? `<s class="was">${money(P[id].price)}</s> ${money(SALE.one)}` : money(P[id].price);
+  window.FDN_SALE = { on: () => salePhase !== "off", unit: id => saleLive() ? SALE.one : P[id].price };
+
   const hdr = $("#hdr"), menu = $("#menu"), menuBtn = $("#menuBtn"), pill = $("#pill");
   const cartEl = $("#cart"), scrim = $("#scrim"), pmEl = $("#pm");
   const live = $("#live");
@@ -1394,7 +1561,7 @@ main:focus{outline:none}
   if (!orderNo) { orderNo = newOrderNo(); save("fdn_order", orderNo); }
 
   const count = () => cart.reduce((a, l) => a + l.qty, 0);
-  const total = () => cart.reduce((a, l) => a + P[l.id].price * l.qty, 0);
+  const total = () => priceOf(cart).total;
   const inCart = (id, size) => cart.filter(l => l.id === id && l.size === size).reduce((a, l) => a + l.qty, 0);
   const left = (id, size) => (P[id].stock[size] ?? 0) - inCart(id, size);
   const stockLabel = (id, size) => {
@@ -1438,7 +1605,7 @@ main:focus{outline:none}
   function renderBuybox() {
     const p = P[current], s = heroSize[current];
     bb.name.textContent = p.name;
-    bb.price.textContent = money(p.price);
+    bb.price.innerHTML = priceHTML(current);
     renderSizes(bb.sizes, current, s, sz => { heroSize[current] = sz; renderBuybox(); }, false);
     bb.stock.textContent = stockText(current, s);
     bb.add.textContent = s ? `Add size ${s} to cart` : "Add to cart";
@@ -1498,9 +1665,10 @@ main:focus{outline:none}
         <img class="cm-a" src="${p.images[0]}" alt="FIDENTIAL ${p.name} gym shorts in ${p.colour.toLowerCase()}" width="1000" height="1500" loading="lazy" decoding="async">
         <img class="cm-b" src="${p.images[1] || p.images[0]}" alt="" width="1000" height="1500" loading="lazy" decoding="async">
         <span class="card-tag">${p.idx} · ${p.colour}</span>
+        <span class="card-sale" data-when="teaser live"><i class="sale-dot"></i><span data-deal="card"></span></span>
       </button>
       <div class="card-body">
-        <div class="card-top"><h3 class="card-name">${p.name}</h3><p class="card-price">${money(p.price)}</p></div>
+        <div class="card-top"><h3 class="card-name">${p.name}</h3><p class="card-price" data-price="${id}">${money(p.price)}</p></div>
         ${rateLink(id)}
         <p class="card-desc">${p.short}</p>
         <div class="card-quick"><span class="ql">Quick add</span><div class="sizes sizes-quick"></div><button class="link-btn" type="button" data-open="${id}">Details</button></div>
@@ -1534,9 +1702,10 @@ main:focus{outline:none}
 
   function buildMessage(sample) {
     const list = sample || cart;
-    const sum = list.reduce((a, l) => a + P[l.id].price * l.qty, 0);
+    const pr = priceOf(list);
     const items = list.reduce((a, l) => a + l.qty, 0);
     const lines = list.map((l, i) => `${i + 1}. ${P[l.id].name} (${P[l.id].colour}) — Size ${l.size} × ${l.qty} — ${money(P[l.id].price * l.qty)}`);
+    const deal = [pr.pairs && `${pr.pairs} × pair at ${money(SALE.two)}`, pr.singles && `1 × single at ${money(SALE.one)}`].filter(Boolean).join(" + ");
     const out = [
       "*NEW ORDER — FIDENTIAL*",
       `Order no: ${sample ? "FDN-261028-4821" : orderNo}`,
@@ -1544,7 +1713,8 @@ main:focus{outline:none}
       ...lines,
       "",
       `Items: ${items}`,
-      `*Total: ${money(sum)}*`,
+      ...(pr.total < pr.regular ? [`Subtotal: ${money(pr.regular)}`, `11.11 sale (${deal}): −${money(pr.regular - pr.total)}`] : []),
+      `*Total: ${money(pr.total)}*`,
       "(Delivery charges to be confirmed)"
     ];
     if (!sample) {
@@ -1595,13 +1765,15 @@ main:focus{outline:none}
   }
 
   function renderCart() {
-    const n = count(), sum = total();
+    const n = count(), pr = priceOf(cart), sum = pr.total;
     const fk = document.activeElement && document.activeElement.dataset ? document.activeElement.dataset.k : null;
     $("#cartCount").textContent = n;
     $("#cartBtn").setAttribute("aria-label", `Cart, ${plural(n)}`);
     $("#drCount").textContent = n ? plural(n) : "";
     $("#orderNo").textContent = orderNo;
-    $$("[data-total]").forEach(el => { el.textContent = money(sum); });
+    $$("[data-total]").forEach(el => { el.innerHTML = sum < pr.regular ? `<s class="was">${money(pr.regular)}</s> ${money(sum)}` : money(sum); });
+    $$("[data-disc]").forEach(el => { el.hidden = !(sum < pr.regular); $("b", el).textContent = "−" + money(pr.regular - sum); });
+    paintNudge(n, pr);
     $("#cartEmpty").hidden = n > 0;
     $("#bagFoot").hidden = n === 0;
     linesEl.innerHTML = "";
@@ -1634,7 +1806,24 @@ main:focus{outline:none}
     updateWa();
     if (!n && view !== "bag") setView("bag");
   }
-  function commit() { save("fdn_cart", cart); renderCart(); refreshQuick(); renderBuybox(); if (pm.id) renderPmSizes(); }
+  // in the bag, the sale nudges toward a pair: with one short in, the second costs only the difference
+  function paintNudge(n, pr) {
+    const el = $("#bagDeal");
+    el.hidden = salePhase === "off" || !n;
+    if (el.hidden) return;
+    const last = cart[cart.length - 1];
+    if (salePhase === "teaser") el.innerHTML = `<i class="sale-dot"></i><span>11.11 sale, ${SALE.dates}: 2 shorts for ${rs(SALE.two)}.</span>`;
+    else if (n % 2) el.innerHTML = `<i class="sale-dot"></i><span>Add one more short for just ${rs(SALE.two - SALE.one)} and pay ${rs(SALE.two)} for the pair.</span><span class="nudge-acts">${left(last.id, last.size) > 0 ? `<button class="link-btn" type="button" data-nudge="same">Same again</button>` : ""}<button class="link-btn" type="button" data-nudge="shop">Pick another</button></span>`;
+    else el.innerHTML = `<i class="sale-dot ok"></i><span>11.11 pair deal applied. You save ${rs(pr.regular - pr.total)}.</span>`;
+  }
+  $("#bagDeal").addEventListener("click", e => {
+    const b = e.target.closest("[data-nudge]"); if (!b) return;
+    const last = cart[cart.length - 1];
+    if (b.dataset.nudge === "same" && last) addToCart(last.id, last.size, 1, null);
+    else { closeCart(); goTo("#shop"); }
+  });
+  let refreshPair = () => {};   // the 11.11 pair picker, set up further down
+  function commit() { save("fdn_cart", cart); renderCart(); refreshQuick(); renderBuybox(); if (pm.id) renderPmSizes(); refreshPair(); }
   function removeLine(l, li) {
     const done = () => { const i = cart.indexOf(l); if (i > -1) cart.splice(i, 1); commit(); if (!cart.length) $("#emptyShop").focus({ preventScroll: true }); };
     if (reduce || !li.animate) return done();
@@ -1789,7 +1978,7 @@ main:focus{outline:none}
     Object.assign(pm, { id, size: null, qty: 1 });
     $("#pmIdx").textContent = `${p.idx} · ${p.colour}`;
     $("#pmName").textContent = p.name;
-    $("#pmPrice").textContent = money(p.price);
+    $("#pmPrice").innerHTML = priceHTML(id);
     const pr = $("#pmRate"); pr.innerHTML = rateLink(id); pr.hidden = !pr.innerHTML;
     $("#pmDesc").textContent = p.desc;
     pmTrack.innerHTML = p.images.map((src, i) => `<img src="${src}" alt="${p.name} gym shorts, photo ${i + 1}" draggable="false" decoding="async">`).join("");
@@ -2469,16 +2658,127 @@ main:focus{outline:none}
   $("#yr").textContent = new Date().getFullYear();
 
   /* ===== example WhatsApp bubble ===== */
-  $("#bubble").innerHTML = buildMessage([{ id: "black-panther", size: "M", qty: 1 }, { id: "blue-sky", size: "S", qty: 1 }])
-    .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/\*(.+?)\*/g, "<b>$1</b>") + "<small>12:41 ✓✓</small>";
+  function paintBubble() {
+    $("#bubble").innerHTML = buildMessage([{ id: "black-panther", size: "M", qty: 1 }, { id: "blue-sky", size: "S", qty: 1 }])
+      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/\*(.+?)\*/g, "<b>$1</b>") + "<small>12:41 ✓✓</small>";
+  }
+  paintBubble();
 
   /* ===== copy number ===== */
   $("#copyNum").addEventListener("click", async e => {
     const btn = e.currentTarget;
-    try { await navigator.clipboard.writeText("+94772952492"); btn.textContent = "Copied"; }
+    try { await navigator.clipboard.writeText("+" + STORE.whatsapp); btn.textContent = "Copied"; }
     catch (err) { const r = document.createRange(); r.selectNodeContents($("#waNum")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent = "Selected, press copy"; }
     setTimeout(() => { btn.textContent = "Copy number"; }, 2200);
   });
+
+  /* ===== 11.11 sale: section, countdown, pair picker, and every price on the page ===== */
+  (function sale() {
+    if (!SALE) return;
+    const sec = $("#sale"), reg = P[IDS[0]].price, pad = n => String(n).padStart(2, "0");
+    const day = t => new Date(t).toLocaleDateString("en-GB", { day: "numeric", month: "long", timeZone: "Asia/Colombo" });
+    const dayShort = t => new Date(t).toLocaleDateString("en-GB", { day: "numeric", month: "short", timeZone: "Asia/Colombo" });
+    const days = Math.round((SALE_END - SALE_START) / 864e5);
+    // the offer figures come from STORE, so the cards stay right if the prices change
+    const fig = { one: rs(SALE.one), two: rs(SALE.two), was1: rs(reg), was2: rs(reg * 2), save1: rs(reg - SALE.one), save2: rs(reg * 2 - SALE.two) };
+    $$("[data-sp]").forEach(el => { el.textContent = fig[el.dataset.sp]; });
+    $("#saleStrip").innerHTML = `<span><b>11.11 Special Sale</b><i></i>1 short ${fig.one}<i></i>2 shorts ${fig.two} for both<i></i>${SALE.dates}<i></i></span>`.repeat(10);
+
+    // before the sale: get the offer first on WhatsApp (the stock plan's waitlist), or save the date
+    $("#saleEarly").prepend($("#waBtn svg").cloneNode(true));
+    $("#saleEarly").href = `https://wa.me/${STORE.whatsapp}?text=${encodeURIComponent(`Hi FIDENTIAL, please send me the 11.11 offer as soon as the sale opens (${SALE.dates}).`)}`;
+    $("#saleCal").addEventListener("click", () => {
+      const z = t => new Date(t).toISOString().replace(/[-:]/g, "").replace(/\.\d+/, "");
+      const txt = s => s.replace(/[,;\\]/g, m => "\\" + m);
+      const ics = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//FIDENTIAL//11.11//EN", "BEGIN:VEVENT", `UID:fdn-sale-${SALE_START}@fidential.shop`, `DTSTAMP:${z(Date.now())}`,
+        `DTSTART:${z(SALE_START)}`, `DTEND:${z(SALE_END)}`, "SUMMARY:FIDENTIAL 11.11 Special Sale", `DESCRIPTION:${txt(`1 short ${fig.one}. 2 shorts ${fig.two} for both. https://fidential.shop/#sale`)}`,
+        "URL:https://fidential.shop/#sale", "BEGIN:VALARM", "TRIGGER:PT0M", "ACTION:DISPLAY", "DESCRIPTION:FIDENTIAL 11.11 Special Sale is live", "END:VALARM", "END:VEVENT", "END:VCALENDAR"].join("\r\n");
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(new Blob([ics], { type: "text/calendar" }));
+      a.download = "fidential-11-11-sale.ics";
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+    });
+
+    // during the sale: build a pair (any two colours and sizes) and add both in one tap
+    const pairEl = $("#pair"), open = $("#pairOpen"), rows = $$(".pair-row", pairEl), note = $("#pairNote");
+    const sel = [{ id: IDS[0], size: null }, { id: IDS[1] || IDS[0], size: null }];
+    function renderPair(focus) {
+      rows.forEach((row, k) => {
+        $(".pair-cols", row).innerHTML = IDS.map(id => `<button type="button" style="--sw:${P[id].swatch}" data-id="${id}" aria-pressed="${sel[k].id === id}" aria-label="${P[id].name}" title="${P[id].name}"></button>`).join("");
+        renderSizes($(".sizes", row), sel[k].id, sel[k].size, sz => { sel[k].size = sz; note.textContent = ""; renderPair([k, "size"]); }, false);
+      });
+      if (focus) { const row = rows[focus[0]], el = focus[1] === "size" ? $('.size[aria-checked="true"]', row) : $('.pair-cols [aria-pressed="true"]', row); if (el) el.focus({ preventScroll: true }); }
+    }
+    refreshPair = () => { if (!pairEl.hidden) renderPair(); };
+    rows.forEach((row, k) => $(".pair-cols", row).addEventListener("click", e => {
+      const b = e.target.closest("button"); if (!b) return;
+      sel[k].id = b.dataset.id; sel[k].size = null; renderPair([k, "colour"]);
+    }));
+    open.addEventListener("click", () => {
+      pairEl.hidden = false; open.hidden = true; open.setAttribute("aria-expanded", "true");
+      renderPair([0, "colour"]);
+      if (!reduce) pairEl.animate([{ opacity: 0, transform: "translateY(10px)" }, { opacity: 1, transform: "none" }], { duration: 450, easing: "cubic-bezier(.2,.75,.1,1)" });
+    });
+    $("#pairAdd").addEventListener("click", e => {
+      const [a, b] = sel, btn = e.currentTarget, same = a.id === b.id && a.size === b.size;
+      if (!a.size || !b.size) { note.textContent = "Pick a size for both pairs."; shake(btn); return; }
+      if (left(a.id, a.size) < (same ? 2 : 1) || left(b.id, b.size) < 1) {
+        note.textContent = same ? `Only ${Math.max(0, left(a.id, a.size))} left in ${P[a.id].name} size ${a.size}. Pick another for the second pair.` : "One of those sizes just ran out. Pick another.";
+        shake(btn); return;
+      }
+      addToCart(a.id, a.size, 1, btn); addToCart(b.id, b.size, 1, null);
+      sel.forEach(s => { s.size = null; }); renderPair();
+      setTimeout(() => openCart(), reduce ? 0 : 900);
+    });
+
+    // a soft spotlight follows the pointer across the offer cards
+    if (fine && !reduce) $$(".offer", sec).forEach(o => o.addEventListener("pointermove", e => {
+      const r = o.getBoundingClientRect();
+      o.style.setProperty("--mx", `${e.clientX - r.left}px`); o.style.setProperty("--my", `${e.clientY - r.top}px`);
+    }));
+
+    // show the right state everywhere: section, chips, prices, cart, the example message
+    function paint() {
+      const on = salePhase !== "off", teaser = salePhase === "teaser";
+      document.documentElement.classList.toggle("sale-on", on);
+      $$("[data-when]").forEach(el => { el.hidden = !el.dataset.when.split(" ").includes(salePhase); });
+      const set = (k, v) => $$(`[data-deal="${k}"]`).forEach(el => { el.innerHTML = v; });
+      set("line", teaser ? `<i class="sale-dot"></i><span>11.11 sale from ${dayShort(SALE_START)} · 2 for <b>${fig.two}</b></span>` : `<i class="sale-dot"></i><span>11.11 sale · 2 for <b>${fig.two}</b>, mix colours</span>`);
+      set("card", teaser ? "11.11 sale" : `2 for ${fig.two}`);
+      set("chip", teaser ? "11.11 sale starts in" : "11.11 sale ends in");
+      set("cd-label", teaser ? "Starts in" : "Ends in");
+      set("when", teaser ? `${SALE.dates} · ${days === 1 ? "One day" : days + " days"} only` : `Live now · Ends ${day(SALE_END - 1)}`);
+      set("cd-sr", teaser ? `Starts ${day(SALE_START)} at midnight, Sri Lanka time.` : `Ends at midnight on ${day(SALE_END - 1)}, Sri Lanka time.`);
+      $("#ldTag").textContent = on ? "11.11 Special Sale" : "Built to perform";
+      $$("[data-price]").forEach(el => { el.innerHTML = priceHTML(el.dataset.price); });
+      if (pm.id) $("#pmPrice").innerHTML = priceHTML(pm.id);
+      renderBuybox(); renderCart(); paintBubble();
+    }
+
+    // the countdown; it also flips the page from teaser to live to off when the time comes
+    const units = {};
+    $$("[data-cd=full] b[data-u]").forEach(b => { units[b.dataset.u] = b; });
+    const chip = $("[data-cd=short]");
+    let inView = false;
+    new IntersectionObserver(([e]) => { inView = e.isIntersecting; }).observe(sec);
+    function tick() {
+      const ph = phaseNow();
+      if (ph !== salePhase) { salePhase = ph; paint(); }
+      if (ph === "off") return;
+      const ms = Math.max(0, (ph === "teaser" ? SALE_START : SALE_END) - Date.now());
+      const d = Math.floor(ms / 864e5), h = Math.floor(ms / 36e5) % 24, m = Math.floor(ms / 6e4) % 60, s = Math.floor(ms / 1e3) % 60;
+      Object.entries({ d, h, m, s }).forEach(([k, n]) => {
+        const b = units[k], v = pad(n);
+        if (b.textContent === v) return;
+        b.innerHTML = `<i>${v}</i>`;
+        if (inView && !reduce) b.firstChild.animate([{ transform: "translateY(-100%)", opacity: 0 }, { transform: "none", opacity: 1 }], { duration: 450, easing: "cubic-bezier(.2,.75,.1,1)" });
+      });
+      chip.textContent = `${d ? d + "d " : ""}${pad(h)}:${pad(m)}:${pad(s)}`;
+    }
+    paint(); tick();
+    setTimeout(() => { tick(); setInterval(tick, 1000); }, 1000 - Date.now() % 1000);
+  })();
 
   /* ===== fabric colour toggle ===== */
   $$(".fab-toggle button").forEach(b => b.addEventListener("click", () => {
@@ -2580,7 +2880,7 @@ main:focus{outline:none}
     dispatchEvent(new Event("fdn:intro"));
     if (!hasGsap || reduce) return;
     gsap.from(".hero-title .ln > span", { yPercent: 110, duration: 1.1, stagger: .07, ease: "expo.out" });
-    gsap.from(".hero-copy .eyebrow, .hero-sub, .hero-ctas, .buybox > *, .stage-hint", { y: 24, opacity: 0, duration: .9, stagger: .05, delay: .2, ease: "expo.out" });
+    gsap.from(".hero-copy .sale-chip, .hero-copy .eyebrow, .hero-sub, .hero-ctas, .buybox > *, .stage-hint", { y: 24, opacity: 0, duration: .9, stagger: .05, delay: .2, ease: "expo.out" });
   }
   function finishLoader() {
     if (finished) return;
@@ -2805,6 +3105,7 @@ function hero() {
   const spacing = (x, px) => { if ("letterSpacing" in x) x.letterSpacing = px + "px"; };
   function drawSet(id, logo) {
     const p = STORE.products[id], ids = Object.keys(STORE.products), n = String(ids.length).padStart(2, "0");
+    const sale = window.FDN_SALE, price = sale ? sale.unit(id) : p.price;
     const L = U(WIN.x), R = U(WIN.y), top = V(WIN.w), bot = V(WIN.z);
     const name = p.name.toUpperCase();
     // print: R = ink, G = foil seal, B = engraving on the foil
@@ -2820,7 +3121,7 @@ function hero() {
     x.font = `400 ${ns}px ${DISPLAY}`; x.fillStyle = ink(1); x.fillText(name, L, bot + 76);
     x.font = `500 17px ${MONO}`; spacing(x, 3); x.fillStyle = ink(.6);
     x.fillText(`${p.colour.toUpperCase()} · PREMIUM SCUBA · ${Object.keys(STORE.sizes).join(" ")}`, L, bot + 118);
-    x.font = `500 21px ${MONO}`; x.fillStyle = ink(.9); x.fillText(money(p.price), L, bot + 186);
+    x.font = `500 21px ${MONO}`; x.fillStyle = ink(.9); x.fillText(money(price), L, bot + 186);
     x.textAlign = "right"; x.font = `500 14px ${MONO}`; x.fillStyle = ink(.5); x.fillText("BUILT TO PERFORM", R, bot + 186);
     const sx = R - 66, sy = bot - 66;
     x.fillStyle = "rgb(0,255,0)"; x.beginPath(); x.arc(sx, sy, 58, 0, Math.PI * 2); x.fill();
@@ -2828,7 +3129,7 @@ function hero() {
     [52, 35].forEach(r => { x.beginPath(); x.arc(sx, sy, r, 0, Math.PI * 2); x.stroke(); });
     x.textAlign = "center"; x.textBaseline = "middle"; x.font = `400 40px ${DISPLAY}`; spacing(x, 0); x.fillText("F", sx, sy + 2);
     x.font = `500 10px ${MONO}`;
-    const ring = "BUILT TO PERFORM · STYLED TO LAST · ";
+    const ring = sale && sale.on() ? "11.11 SPECIAL SALE · FIDENTIAL · " : "BUILT TO PERFORM · STYLED TO LAST · ";
     [...ring].forEach((ch, i) => { x.save(); x.translate(sx, sy); x.rotate(i / ring.length * Math.PI * 2); x.fillText(ch, 0, -43.5); x.restore(); });
     // aux: R = name printed on the backdrop inside the window, G = back of the tag
     const [ac, y] = sheet();
@@ -2868,7 +3169,7 @@ function hero() {
     y.fillStyle = g(1);
     for (let bx = L; bx < L + 300;) { const w = 2 + Math.floor(rnd() * 4) * 2; if (rnd() > .35) y.fillRect(bx, 960, w, 86); bx += w + 2 + Math.floor(rnd() * 3) * 2; }
     y.font = `500 14px ${MONO}`; spacing(y, 3); y.fillStyle = g(.7); y.fillText(`FDN-${p.idx}-${p.colour.toUpperCase()}`, L, 1074);
-    y.textAlign = "right"; y.font = `400 48px ${DISPLAY}`; spacing(y, 0); y.fillStyle = g(1); y.fillText(money(p.price), R, 1046);
+    y.textAlign = "right"; y.font = `400 48px ${DISPLAY}`; spacing(y, 0); y.fillStyle = g(1); y.fillText(money(price), R, 1046);
     y.fillStyle = g(.3); y.fillRect(L, 1118, R - L, 2);
     y.textAlign = "center"; y.font = `500 14px ${MONO}`; spacing(y, 3); y.fillStyle = g(.6); y.fillText("BUILT TO PERFORM. STYLED TO LAST.", CW / 2, 1170);
     return [pc, ac];

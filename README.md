@@ -65,7 +65,7 @@ Open `index.html` and find the `STORE` block at the top of the first `<script>`:
 
 ```js
 const STORE = {
-  whatsapp: "94772952492",   // WhatsApp number: country code + number, no "+" or spaces
+  whatsapp: "94779313890",   // WhatsApp number: country code + number, no "+" or spaces
   products: {
     "black-panther": { ..., price: 2900, stock: { S: 26, M: 5, L: 1 } },
     "blue-sky":      { ..., price: 2900, stock: { S: 7,  M: 1, L: 1 } }
@@ -75,10 +75,24 @@ const STORE = {
 };
 ```
 
-- **WhatsApp number**: change `whatsapp`. Also update the number in the footer (search for `+94 77 295 2492` and `wa.me/94772952492`) and the `telephone` in the search-engine data at the top of the file.
+- **WhatsApp number**: change `whatsapp`. Also update the number in the footer (search for `+94 77 931 3890` and `wa.me/94779313890`) and the `telephone` in the search-engine data at the top of the file.
 - **Prices**: change `price`. The hero, cards, cart and WhatsApp message all read from it. A few places are plain text, so search for `2,900` and `2900` and update them too: the fabric spec list, the page description at the top, and the two `"price": "2900"` lines in the search-engine data.
 - **Stock**: change `stock`. Sizes at 0 show as sold out, 1 shows "Last one", and 5 or fewer show "Low stock". Customers can't add more than the stock number. If a whole pair sells out, also change its `"availability"` in the search-engine data to `"https://schema.org/OutOfStock"`.
 - **Photos**: replace files in `img/` with the same names (`bp_1.webp`… for Black Panther, `bs_1.webp`… for Blue Sky). Use WebP, about 1000 px wide and under 100 KB, so pages stay fast. The hang tag uses each product's `hero` and `depth` files: a new cutout needs a matching 2:3 depth map (white = nearest), also saved as WebP.
+
+## The 11.11 sale
+The sale is set in the `STORE` block:
+
+```js
+sale: { starts: "2026-11-11T00:00:00+05:30", ends: "2026-11-14T00:00:00+05:30", dates: "11–13 November", one: 2499, two: 3999 },
+```
+
+The site switches on its own, by Sri Lanka time:
+- **Before `starts`**: a teaser. An "11.11" link in the menu, a countdown chip in the hero, and the sale section after the features strip, with a "Get it first on WhatsApp" button and an "Add to calendar" link. Prices stay at LKR 2,900.
+- **From `starts` until `ends`**: the sale is live. One short costs `one` (Rs. 2,499). Each pair, in any colours and sizes, costs `two` (Rs. 3,999), and an odd one out costs `one`, so three shorts are Rs. 6,498. The cards, hero, cart and WhatsApp order all show the sale price. The WhatsApp message lists the discount so the team can see how the total was worked out. With one short in the bag, the cart suggests adding a second for Rs. 1,500 more. In the sale section, "Build your pair" adds two shorts at once.
+- **After `ends`**: everything goes back to normal and the sale section disappears. There's nothing to remove by hand.
+
+To check each state before it happens, open a local or Vercel preview address with `?sale=teaser`, `?sale=live` or `?sale=off` on the end (for example `http://127.0.0.1:5500/index.html?sale=live`). This doesn't work on fidential.shop itself, so customers can't switch the sale on early.
 
 ## How checkout works
 The cart runs in three steps:
