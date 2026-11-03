@@ -84,7 +84,7 @@ const STORE = {
 The sale is set in the `STORE` block:
 
 ```js
-sale: { starts: "2026-11-11T00:00:00+05:30", ends: "2026-11-14T00:00:00+05:30", dates: "11–13 November", one: 2499, two: 3999 },
+sale: { starts: "2026-11-05T00:00:00+05:30", ends: "2026-11-14T00:00:00+05:30", dates: "5–13 November", one: 2499, two: 3999 },
 ```
 
 The site switches on its own, by Sri Lanka time:
