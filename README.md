@@ -1,11 +1,11 @@
 # FIDENTIAL website
 
-Static site for https://fidential.shop, hosted on Vercel. There is no build step and no backend. Orders go out on WhatsApp, and reviews go through Formspree.
+Static site for https://www.fidential.shop, hosted on Vercel. There is no build step and no backend. Orders go out on WhatsApp, and reviews go through Formspree.
 
 ## Files
-The site is the `fidential-website/` folder. File paths in this README are inside it.
+The site is the whole repo: Vercel publishes it as it is. File paths in this README start from the repo folder.
 - `index.html`: the whole site (HTML, CSS and JavaScript).
-- `img/`: product photos, hang-tag cutouts (`*_hero.webp`) and their depth maps (`*_depth.webp`), the white logo, the link-preview image (`og.jpg`), the square logo for search engines (`logo-512.png`) and app icons.
+- `img/`: product photos, hang-tag cutouts (`*_hero.webp`) and their depth maps (`*_depth.webp`), the white logo, the link-preview images (`og.jpg`, and `og-sale.jpg` during the 11.11 sale), the square logo for search engines (`logo-512.png`) and app icons.
 - `fonts/`: the three typefaces (Archivo, Black Ops One and Geist Mono), from Google Fonts under the SIL Open Font License.
 - `vendor/`: the libraries the site runs on: Three.js for the 3D, GSAP for animation and Lenis for smooth scrolling.
 - `404.html`: the "page not found" page.
@@ -15,7 +15,7 @@ The site is the `fidential-website/` folder. File paths in this README are insid
 
 Keep the files and folders in this layout. Vercel publishes the folder exactly as it is.
 
-At the top of the repo, next to this README, `.gitignore` keeps Finder's `.DS_Store` files and Vercel's local `.vercel` folder out of GitHub, and `.vscode/settings.json` points VS Code's Live Server at the site folder.
+Next to this README, `.gitignore` keeps Finder's `.DS_Store` files and Vercel's local `.vercel` folder out of GitHub, and `.vscode/settings.json` points VS Code's Live Server at the repo folder.
 
 ## Reviews (Formspree)
 Customers review in four steps: **Rate → Fit → Review → Send**. They pick the pair, tap a star rating, and can add their size, fit and highlights. Then they write the review and choose whether it's a **public review** or **private feedback**. A hang tag beside the form fills in live as they type, and gets stamped "Received" when the review is sent. Drafts are saved on the customer's device until they send.
@@ -50,7 +50,7 @@ When the first review is published, the reviews wall appears automatically. It s
 
 Only publish real reviews from customers who chose "Public review". You can fix typos, but keep the meaning. Leave private feedback unpublished.
 
-**Tip:** after a delivery, send the customer `https://fidential.shop/#reviews`. The link opens the page right at the review form. If they ordered from the same phone, the pair, size and order number are filled in for them.
+**Tip:** after a delivery, send the customer `https://www.fidential.shop/#reviews`. The link opens the page right at the review form. If they ordered from the same phone, the pair, size and order number are filled in for them.
 
 ## Social links
 Instagram (`@fidential_official`) and Facebook appear in the footer, the mobile menu and the thank-you screen after a review, and in the search-engine data at the top of `index.html`. To change a link, search `index.html` for `instagram.com/fidential_official` or `facebook.com/profile.php` and replace every match.
@@ -77,24 +77,43 @@ const STORE = {
 ```
 
 - **WhatsApp number**: change `whatsapp`. Also update the number in the footer (search for `+94 77 931 3890` and `wa.me/94779313890`) and the `telephone` in the search-engine data at the top of the file.
-- **Prices**: change `price`. The hero, cards, cart and WhatsApp message all read from it. A few places are plain text, so search for `2,900` and `2900` and update them too: the fabric spec list, the page description at the top, and the three `"price": "2900"` lines in the search-engine data.
+- **Prices**: change `price`. The hero, cards, cart and WhatsApp message all read from it. A few places are plain text, so search for `2,900` and `2900` and update them too: the fabric spec list, the page description at the top, and the three `"price": "2900"` lines in the search-engine data (during the 11.11 sale they sit inside each `priceSpecification`, next to the sale price).
 - **Stock**: change `stock`. Sizes at 0 show as sold out, 1 shows "Last one", and 5 or fewer show "Low stock". Customers can't add more than the stock number. If a whole pair sells out, also change its `"availability"` in the search-engine data to `"https://schema.org/OutOfStock"`. Shadow Beige size S is set to 0 until its stock is confirmed.
 - **Photos**: replace files in `img/` with the same names (`bp_1.webp`… for Black Panther, `bs_1.webp`… for Blue Sky, `sb_1.webp`… for Shadow Beige). The first photo is the card picture and the second shows on hover. Use WebP, about 1000 px wide and under 100 KB, so pages stay fast. The hang tag uses each product's `hero` and `depth` files: a new cutout needs a matching 2:3 depth map (white = nearest), also saved as WebP.
 - **"New" label**: `badge: "New"` puts a small label on the Shadow Beige card. Delete it when the pair is no longer new.
 - **Two-tone pairs**: `trim` is the second colour (Shadow Beige's beige waistband and side panels). It splits the colour dot, tints the hang tag, and adds the waistband to the fabric scene.
-- **Adding a pair**: add an entry to `products` with its photos in `img/`. The cards, gallery, cart, product window, pair builder and review form pick it up by themselves. A few places are written out by hand, so search for `shadow-beige` and copy each one: the hero colourway buttons, the fabric buttons and the fabric scene's `COLORS`, the closing "Which pair is yours?" buttons, the footer Shop links and the search-engine data. Also update the "Pick your pair" step, the page description, `sitemap.xml` and `img/og.jpg`, the link-preview picture.
+- **Adding a pair**: add an entry to `products` with its photos in `img/`. The cards, gallery, cart, product window, pair builder and review form pick it up by themselves. A few places are written out by hand, so search for `shadow-beige` and copy each one: the hero colourway buttons, the fabric buttons and the fabric scene's `COLORS`, the closing "Which pair is yours?" buttons, the footer Shop links and the search-engine data. Also update the "Pick your pair" step, the page description, `sitemap.xml` and the link-preview pictures `img/og.jpg` and `img/og-sale.jpg`.
 
 ## The 11.11 sale
 The sale is set in the `STORE` block:
 
 ```js
-sale: { starts: "2026-11-05T00:00:00+05:30", ends: "2026-11-14T00:00:00+05:30", dates: "5–13 November", one: 2499, two: 3999 },
+sale: { starts: "2026-11-07T00:00:00+05:30", ends: "2026-11-15T00:00:00+05:30", dates: "7–14 November", one: 2499, two: 3999 },
 ```
+
+The sale runs from 7 November, 00:00, until the end of 14 November, Sri Lanka time. `ends` is midnight at the start of 15 November. If you change the dates, also change `7–14 November`, `7–14 Nov` and `8 days only` in the page, the `validFrom` / `validThrough` dates in the search-engine data, and `img/og-sale.jpg`.
 
 The site switches on its own, by Sri Lanka time:
 - **Before `starts`**: a teaser. An "11.11" link in the menu, a countdown chip in the hero, and the sale section after the features strip, with a "Get it first on WhatsApp" button and an "Add to calendar" link. Prices stay at LKR 2,900.
 - **From `starts` until `ends`**: the sale is live. One short costs `one` (Rs. 2,499). Each pair, in any colours and sizes, costs `two` (Rs. 3,999), and an odd one out costs `one`, so three shorts are Rs. 6,498. The cards, hero, cart and WhatsApp order all show the sale price. The WhatsApp message lists the discount so the team can see how the total was worked out. With one short in the bag, the cart suggests adding a second for Rs. 1,500 more. In the sale section, "Build your pair" adds two shorts at once.
-- **After `ends`**: everything goes back to normal and the sale section disappears. There's nothing to remove by hand.
+- **After `ends`**: everything goes back to normal and the sale section disappears. The page title, description and search-engine prices switch back too.
+
+### Search engines and link previews
+For the sale, the top of `index.html` advertises it:
+- **Page title and description** (what Google shows): "11.11 Sale 7–14 Nov: Gym Shorts 2 for Rs 3,999", with the sale price, the regular price and "up to 31% off".
+- **Link previews** (WhatsApp, Facebook, Instagram, X): a sale title and description, and the sale picture `img/og-sale.jpg`.
+- **Search-engine data**: each pair's offer has the sale price, Rs. 2,499, valid 7–14 November, and the regular Rs. 2,900 as the "strikethrough" price. Google can show the discount in results, and it knows the dates, so it stops showing the sale price after the 14th.
+- **The sale section**: the regular price, the sale price, the saving and the percentage, as plain text Google can read.
+
+After sharing the link, paste `https://www.fidential.shop/` into Facebook's Sharing Debugger (https://developers.facebook.com/tools/debug/) and click **Scrape Again**, so Facebook and Instagram show the sale preview straight away.
+
+### After the sale (from 15 November)
+The page switches its title and description back by itself, but link previews read the file directly. Tidy up when convenient:
+1. In the `<head>` of `index.html`, replace the `content` of each tag that has a `data-after` (the title, the description and the `og:` lines) with its `data-after` text, then delete the `data-after` attributes and the 11.11 comment above them.
+2. In the search-engine data, replace each pair's `"priceSpecification": [ … ]` with `"price": "2900",`.
+3. Publish, then refresh the preview in Facebook's Sharing Debugger.
+
+The sale code itself can stay. It does nothing after `ends`.
 
 To check each state before it happens, open a local or Vercel preview address with `?sale=teaser`, `?sale=live` or `?sale=off` on the end (for example `http://127.0.0.1:5500/index.html?sale=live`). This doesn't work on fidential.shop itself, so customers can't switch the sale on early.
 
@@ -110,12 +129,13 @@ The cart runs in three steps:
 Already in place:
 - A page title and description aimed at "gym shorts" and "activewear" in Sri Lanka.
 - A main heading that says what the site sells, descriptive image text, and a canonical address.
-- Link previews for WhatsApp, Instagram, Facebook and X, using `img/og.jpg`.
+- Link previews for WhatsApp, Instagram, Facebook and X, using `img/og.jpg` (`img/og-sale.jpg` during the 11.11 sale).
+- During the 11.11 sale: a sale title and description, and sale prices with the regular price struck through in the search-engine data (see The 11.11 sale).
 - Search-engine data (schema.org) for the brand, its Instagram, Facebook and WhatsApp, and every pair with price and stock. Review stars are added once reviews are published.
 - `sitemap.xml`, `robots.txt`, favicons and app icons.
 
 After the site goes live:
-1. **Google Search Console** (https://search.google.com/search-console): add `fidential.shop` as a **Domain** property. Google gives you a TXT record: add it in GoDaddy under **DNS → DNS Records → Add New Record** (type TXT, name `@`), then click Verify. Then submit `sitemap.xml` under **Sitemaps**.
+1. **Google Search Console** (https://search.google.com/search-console): add `fidential.shop` as a **Domain** property. Google gives you a TXT record: add it in GoDaddy under **DNS → DNS Records → Add New Record** (type TXT, name `@`), then click Verify. Then submit `https://www.fidential.shop/sitemap.xml` under **Sitemaps**.
 2. **Socials**: put `fidential.shop` in the Instagram and Facebook bios.
 3. **Check the preview**: paste the address into Facebook's Sharing Debugger (https://developers.facebook.com/tools/debug/) to see the preview card and refresh it.
 4. **Optional, Google Merchant Center**: free product listings in Google Shopping. It asks for delivery and return details.
@@ -130,15 +150,15 @@ After the site goes live:
 Lighthouse on a local copy before launch: Performance 90–93 on mobile and 98–99 on desktop; Accessibility, Best Practices and SEO 100. Google's PageSpeed Insights varies a few points between runs.
 
 ## Hosting (GitHub → Vercel, domain at GoDaddy)
-The code is in the GitHub repository `ionikcollectives/Fidential-Web`. Vercel publishes its `fidential-website/` folder at **https://fidential.shop**, and the domain is registered at GoDaddy.
+The code is in the GitHub repository `ionikcollectives/Fidential`. Vercel publishes it at **https://www.fidential.shop**, and the domain is registered at GoDaddy.
 
 - `vercel.json` adds basic security headers. It lets browsers keep images for a day, and the fonts and libraries for a year. After you replace a photo, a returning visitor can see the old one for up to a day.
 - Vercel serves `404.html` for any address that doesn't exist, and sets up HTTPS by itself.
 - Vercel's free Hobby plan is for non-commercial use only. Selling products counts as commercial, so the project needs the Pro plan.
 
 ### First-time setup
-1. In Vercel, choose **Add New → Project** and import the `Fidential-Web` repository. Connect your GitHub account if asked.
-2. Set **Root Directory** to `fidential-website`. Leave **Framework Preset** on **Other**, with no build command.
+1. In Vercel, choose **Add New → Project** and import the `Fidential` repository. Connect your GitHub account if asked.
+2. Leave **Root Directory** as it is (the repo itself) and **Framework Preset** on **Other**, with no build command.
 3. Click **Deploy**, then add the domain (see Domain settings).
 
 ### Publish an update
@@ -146,14 +166,14 @@ Make the change, then in GitHub Desktop write a short summary, click **Commit to
 
 Vercel keeps earlier versions. To undo an update, open the project's **Deployments** tab, find the previous version and choose **Instant Rollback** from its menu.
 
-You can also publish without GitHub, from a terminal opened in `fidential-website/`: run `npx vercel login` once, then `npx vercel --prod` for each update.
+You can also publish without GitHub, from a terminal opened in the repo folder: run `npx vercel login` once, then `npx vercel --prod` for each update.
 
 ### Domain settings
 In Vercel, the project's **Settings → Domains** page should show:
-- `fidential.shop`: connected to Production.
-- `www.fidential.shop`: redirects to `fidential.shop`.
+- `www.fidential.shop`: connected to Production.
+- `fidential.shop`: redirects to `www.fidential.shop`.
 
-The address without `www` is the main one. The canonical tag, sitemap, link previews and search-engine data all use it. When you add the domain, Vercel suggests the opposite (sending visitors to `www`), so check that the setup above is what you see.
+The `www` address is the main one, and it's how Vercel is set up now. The canonical tag, sitemap, `robots.txt`, link previews and search-engine data all use it. If you ever swap the two in Vercel, also replace `https://www.fidential.shop` with `https://fidential.shop` in those files, so search engines aren't pointed at an address that redirects.
 
 In GoDaddy, the domain's **DNS → DNS Records** need these two records:
 
@@ -166,12 +186,12 @@ Delete any other A or AAAA records named `@`. Leave the NS, SOA, MX, TXT and `_d
 
 ### Preview on your computer
 Serve the folder instead of double-clicking `index.html`. Browsers block 3D textures on `file://` pages, so the hero falls back to a flat image.
-- VS Code: click "Go Live" (Live Server). `.vscode/settings.json` already points it at `fidential-website/`.
-- Terminal, in `fidential-website/`: run `npx serve`, then open the address it prints.
+- VS Code: click "Go Live" (Live Server). `.vscode/settings.json` already points it at the repo folder.
+- Terminal, in the repo folder: run `npx serve`, then open the address it prints.
 
 Everything the site needs is in the folder, so the preview works offline too, apart from sending reviews and opening WhatsApp.
 
 ### Keep the folder on this Mac
-The repo is on the Desktop, which iCloud syncs. When the Mac runs low on space, macOS moves files to iCloud, and Live Server or a deploy fails if a file isn't on the Mac. In Finder, right-click the `Fidential-Web` folder and choose **Keep Downloaded**.
+The repo is on the Desktop, which iCloud syncs. When the Mac runs low on space, macOS moves files to iCloud, and Live Server or a deploy fails if a file isn't on the Mac. In Finder, right-click the `Fidential` folder (Desktop → IONIK Collectives → Websites) and choose **Keep Downloaded**.
 
 Built by IONIK — ionikcollectives.com

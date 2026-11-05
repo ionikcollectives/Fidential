@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://fidential.shop/sitemap.xml
+Sitemap: https://www.fidential.shop/sitemap.xml
