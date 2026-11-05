@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>FIDENTIAL | Premium Gym Shorts &amp; Activewear in Sri Lanka</title>
-<meta name="description" content="Premium Scuba-fabric gym shorts by FIDENTIAL, a Sri Lankan activewear brand. Black Panther and Blue Sky, sizes S–L, LKR 2,900. Order on WhatsApp in minutes.">
+<meta name="description" content="Premium Scuba-fabric gym shorts by FIDENTIAL, Sri Lanka. Black Panther, Blue Sky and Shadow Beige, sizes S–L, LKR 2,900. Order on WhatsApp in minutes.">
 <link rel="canonical" href="https://fidential.shop/">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="theme-color" content="#070707">
@@ -14,11 +14,11 @@
 <meta property="og:site_name" content="FIDENTIAL">
 <meta property="og:url" content="https://fidential.shop/">
 <meta property="og:title" content="FIDENTIAL | Premium Gym Shorts in Sri Lanka">
-<meta property="og:description" content="Scuba-fabric gym shorts built to perform and styled to last. Black Panther and Blue Sky, LKR 2,900. Order on WhatsApp.">
+<meta property="og:description" content="Scuba-fabric gym shorts built to perform and styled to last. Black Panther, Blue Sky and Shadow Beige, LKR 2,900. Order on WhatsApp.">
 <meta property="og:image" content="https://fidential.shop/img/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="FIDENTIAL gym shorts in Black Panther and Blue Sky">
+<meta property="og:image:alt" content="FIDENTIAL gym shorts in Black Panther, Blue Sky and Shadow Beige">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="favicon.ico" sizes="32x32">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -28,7 +28,7 @@
 <link rel="preload" href="fonts/black-ops-one-v21-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/archivo-v25-latin.woff2" as="font" type="font/woff2" crossorigin>
 <!-- the 3D library and hang-tag photos are fetched by the script once the loader has painted -->
-<!-- search engines: the brand, the site and both pairs. Keep price and stock in step with STORE below. Review stars are added from STORE.reviews.published -->
+<!-- search engines: the brand, the site and every pair. Keep price and stock in step with STORE below. Review stars are added from STORE.reviews.published -->
 <script type="application/ld+json" id="ld">
 {
   "@context": "https://schema.org",
@@ -89,6 +89,28 @@
       "material": "Scuba fabric",
       "category": "Gym shorts",
       "image": ["https://fidential.shop/img/bs_1.webp", "https://fidential.shop/img/bs_2.webp", "https://fidential.shop/img/bs_3.webp"],
+      "url": "https://fidential.shop/#shop",
+      "offers": {
+        "@type": "Offer",
+        "url": "https://fidential.shop/#shop",
+        "price": "2900",
+        "priceCurrency": "LKR",
+        "availability": "https://schema.org/InStock",
+        "itemCondition": "https://schema.org/NewCondition",
+        "seller": { "@id": "https://fidential.shop/#org" }
+      }
+    },
+    {
+      "@type": "Product",
+      "@id": "https://fidential.shop/#shadow-beige",
+      "name": "FIDENTIAL Shadow Beige Gym Shorts",
+      "description": "Black gym shorts with a beige waistband and side panels, a contemporary two-colour design for the gym and every day. Premium Scuba fabric, an elastic waistband and an adjustable drawstring. Sizes S, M and L.",
+      "sku": "FDN-03-BLACK-BEIGE",
+      "brand": { "@type": "Brand", "name": "FIDENTIAL" },
+      "color": "Black/Beige",
+      "material": "Scuba fabric",
+      "category": "Gym shorts",
+      "image": ["https://fidential.shop/img/sb_1.webp", "https://fidential.shop/img/sb_2.webp", "https://fidential.shop/img/sb_3.webp"],
       "url": "https://fidential.shop/#shop",
       "offers": {
         "@type": "Offer",
@@ -270,8 +292,9 @@ main:focus{outline:none}
 .hero-sub{color:var(--mute);max-width:36ch;margin:0}
 .hero-ctas{display:flex;gap:22px;align-items:center;flex-wrap:wrap}
 .buybox{grid-column:3;justify-self:end;width:min(340px,100%);display:grid;gap:14px}
-.cw{display:flex;gap:8px}
-.cw button{flex:1;display:flex;align-items:center;justify-content:center;gap:9px;height:42px;padding:0 12px;border:1px solid var(--line);font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);transition:border-color .3s,color .3s,background .3s}
+/* one equal column per colourway; long names wrap onto a second line inside the same 42px button */
+.cw{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:8px}
+.cw button{display:flex;align-items:center;justify-content:center;gap:8px;min-height:42px;padding:6px 10px;border:1px solid var(--line);font-family:var(--f-mono);font-size:11px;line-height:1.25;letter-spacing:.08em;text-align:left;text-transform:uppercase;color:var(--mute);transition:border-color .3s,color .3s,background .3s}
 .cw button[aria-pressed="true"]{border-color:var(--chalk);color:var(--chalk);background:rgba(240,240,234,.05)}
 @media (hover:hover){.cw button:hover{color:var(--chalk)}}
 .bb-row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding-top:6px}
@@ -293,23 +316,26 @@ main:focus{outline:none}
 .sec-title{display:grid;gap:18px}
 
 /* product cards */
-.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(16px,2.4vw,32px)}
-.card{position:relative;display:grid;align-content:start}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,2vw,28px)}
+/* each card sizes its own type and chips from its width (see the @container rules below), so three across fit any screen */
+.card{position:relative;display:grid;grid-template-rows:auto 1fr;container-type:inline-size}
 .card-media{position:relative;display:block;width:100%;aspect-ratio:4/5;overflow:hidden;background:#111}
 .card-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .7s var(--ease),transform 1.2s var(--ease)}
 .card-media .cm-b{opacity:0}
 @media (hover:hover){.card-media:hover .cm-a{opacity:0}.card-media:hover .cm-b{opacity:1}.card-media:hover img{transform:scale(1.035)}}
-.card-tag{position:absolute;left:14px;top:14px;font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding:6px 9px;background:rgba(7,7,7,.66);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
-.card-body{padding:20px 0 0;display:grid;gap:14px}
+.card-tag{position:absolute;left:14px;top:14px;display:inline-flex;align-items:center;gap:9px;font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding:6px 9px;background:rgba(7,7,7,.66);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.card-tag b{margin:-2px -5px -2px 0;padding:2px 5px;background:var(--chalk);color:var(--ink);font-weight:500;letter-spacing:.12em}
+.card-body{padding:20px 0 0;display:flex;flex-direction:column;gap:14px}
 .card-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
-.card-name{font-family:var(--f-display);font-weight:400;font-size:clamp(26px,2.6vw,40px);line-height:.95;text-transform:uppercase;margin:0}
+.card-name{font-family:var(--f-display);font-weight:400;font-size:clamp(24px,2.2vw,34px);line-height:.95;text-transform:uppercase;margin:0}
+@supports (font-size:1cqi){.card-name{font-size:clamp(24px,7.6cqi,40px)}}
 .card-price{font-family:var(--f-mono);font-size:15px;margin:0;white-space:nowrap;color:var(--mute)}
 .card-desc{color:var(--mute);margin:0;max-width:46ch}
 .card-rate{display:inline-flex;align-items:center;gap:10px;width:max-content;font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);text-decoration:none;transition:color .3s}
 .card-rate:hover{color:var(--chalk)}
 .card-rate .stars{--s:13px}
 .pm-rate{margin:0}
-.card-quick{display:flex;align-items:center;gap:12px 16px;flex-wrap:wrap;padding-top:14px;border-top:1px solid var(--line)}
+.card-quick{margin-top:auto;display:flex;align-items:center;gap:12px 16px;flex-wrap:wrap;padding-top:14px;border-top:1px solid var(--line)}
 .card-quick .link-btn{margin-left:auto}
 .ql{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
 
@@ -794,6 +820,26 @@ main:focus{outline:none}
   .card-sale{right:10px;top:10px}
 }
 
+/* three pairs: layouts that follow the room a card, offer or picker gets, not the screen */
+@container (max-width:400px){.card-sale{left:14px;right:auto;top:49px}}
+@container (max-width:330px){
+  .card-top,.card-top:has(.was){flex-direction:column;align-items:flex-start;gap:8px}
+  .card-price .was{display:inline;margin-right:6px}
+  .card-quick .ql{display:none}
+}
+/* the pair builder puts the sizes under the colours when its offer card is narrow */
+@container (max-width:340px){.pair-row{grid-template-columns:auto minmax(0,1fr);row-gap:10px}.pair-row .sizes{grid-column:2}}
+.rv-pane{container-type:inline-size}
+.rv-picks{grid-template-columns:repeat(3,minmax(0,1fr))}
+/* each option needs about 210px, so three across only from 660px */
+@container (max-width:660px){.rv-picks{grid-template-columns:minmax(0,1fr)}}
+.fab-toggle{flex-wrap:wrap}
+@media (max-width:640px){
+  .fab-toggle{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);width:100%}
+  .fab-toggle button{justify-content:center;height:auto;min-height:42px;padding:6px 10px;line-height:1.25;text-align:left}
+}
+@media (max-width:380px){.cw button,.fab-toggle button{gap:7px;padding:6px 8px;letter-spacing:.04em}}
+
 /* responsive */
 @media (max-width:1100px){
   .steps{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -950,6 +996,7 @@ main:focus{outline:none}
         <div class="cw" role="group" aria-label="Colourway">
           <button type="button" aria-pressed="true" data-p="black-panther"><i class="sw" style="--sw:#161616"></i>Black Panther</button>
           <button type="button" aria-pressed="false" data-p="blue-sky"><i class="sw" style="--sw:#24368e"></i>Blue Sky</button>
+          <button type="button" aria-pressed="false" data-p="shadow-beige"><i class="sw" style="--sw:linear-gradient(135deg,#161616 50%,#d2b8a2 50%)"></i>Shadow Beige</button>
         </div>
         <div class="bb-row"><p class="bb-name" id="bbName">Black Panther</p><p class="bb-price" id="bbPrice">LKR 2,900</p></div>
         <a class="deal-line" href="#sale" data-deal="line" data-when="teaser live" hidden></a>
@@ -1026,7 +1073,7 @@ main:focus{outline:none}
       <div class="sec-head row" data-reveal>
         <div class="sec-title">
           <p class="eyebrow">The collection</p>
-          <h2 class="h2" id="shopTitle">Two colourways.<br>One standard.</h2>
+          <h2 class="h2" id="shopTitle">Three colourways.<br>One standard.</h2>
         </div>
         <p class="lede">Every pair of FIDENTIAL gym shorts is cut from premium Scuba fabric, with an elastic waistband and an adjustable drawstring. Tap a size to add it straight to your cart.</p>
       </div>
@@ -1044,6 +1091,7 @@ main:focus{outline:none}
         <div class="fab-toggle" role="group" aria-label="Fabric colour">
           <button type="button" aria-pressed="true" data-c="black-panther"><i class="sw" style="--sw:#161616"></i>Black Panther</button>
           <button type="button" aria-pressed="false" data-c="blue-sky"><i class="sw" style="--sw:#24368e"></i>Blue Sky</button>
+          <button type="button" aria-pressed="false" data-c="shadow-beige"><i class="sw" style="--sw:linear-gradient(135deg,#161616 50%,#d2b8a2 50%)"></i>Shadow Beige</button>
         </div>
         <ul class="specs">
           <li><span class="k">Fabric</span><span class="v">Premium Scuba</span></li>
@@ -1129,7 +1177,7 @@ main:focus{outline:none}
         <h2 class="h2" id="howTitle">Checkout is one<br>WhatsApp message.</h2>
       </div>
       <ol class="steps" data-reveal>
-        <li><h3>Pick your pair</h3><p>Choose Black Panther or Blue Sky and your size.</p></li>
+        <li><h3>Pick your pair</h3><p>Choose Black Panther, Blue Sky or Shadow Beige and your size.</p></li>
         <li><h3>Add to cart</h3><p>Mix colours and sizes. Change quantities any time.</p></li>
         <li><h3>Check out</h3><p>Add your delivery details now, or share them in the chat.</p></li>
         <li><h3>Send on WhatsApp</h3><p>Your order is written for you. We reply to confirm delivery and payment.</p></li>
@@ -1290,10 +1338,11 @@ main:focus{outline:none}
 
   <section class="final">
     <div class="wrap">
-      <h2 data-reveal>Black Panther<br><span class="o">or Blue Sky?</span></h2>
+      <h2 data-reveal>Which pair<br><span class="o">is yours?</span></h2>
       <div class="final-ctas">
         <button class="btn btn-solid" type="button" data-open="black-panther">Shop Black Panther</button>
         <button class="btn" type="button" data-open="blue-sky">Shop Blue Sky</button>
+        <button class="btn" type="button" data-open="shadow-beige">Shop Shadow Beige</button>
       </div>
     </div>
   </section>
@@ -1315,6 +1364,7 @@ main:focus{outline:none}
         <p class="mono">Shop</p>
         <a href="#shop" data-open="black-panther">Black Panther</a>
         <a href="#shop" data-open="blue-sky">Blue Sky</a>
+        <a href="#shop" data-open="shadow-beige">Shadow Beige</a>
         <a href="#fit">Size guide</a>
       </div>
       <div>
@@ -1477,6 +1527,15 @@ main:focus{outline:none}
         images: ["img/bs_1.webp", "img/bs_2.webp", "img/bs_3.webp"],
         hero: "img/bs_hero.webp", depth: "img/bs_depth.webp",
         stock: { S: 7, M: 1, L: 1 }
+      },
+      "shadow-beige": {
+        // "trim" is the second colour of a two-tone pair (beige waistband and side panels); "badge" adds a small label to its card
+        name: "Shadow Beige", idx: "03", colour: "Black/Beige", swatch: "#161616", trim: "#d2b8a2", price: 2900, badge: "New",
+        desc: "Black with a beige waistband and side panels, a contemporary two-colour design for the gym and every day. Premium Scuba fabric, an elastic waistband and an adjustable drawstring.",
+        short: "Black with beige panels, a contemporary two-colour design.",
+        images: ["img/sb_1.webp", "img/sb_2.webp", "img/sb_3.webp"],
+        hero: "img/sb_hero.webp", depth: "img/sb_depth.webp",
+        stock: { S: 0, M: 19, L: 12 }    // size S not confirmed yet, so it shows as sold out
       }
     },
     sizes: { S: { waist: "28–30", length: "15" }, M: { waist: "32–34", length: "16" }, L: { waist: "36–38", length: "16.5" } },
@@ -1506,6 +1565,8 @@ main:focus{outline:none}
   const P = STORE.products;
   const IDS = Object.keys(P);
   const SIZES = Object.keys(STORE.sizes);
+  // colour dot: two-tone pairs get a split dot
+  const swatchOf = id => P[id].trim ? `linear-gradient(135deg,${P[id].swatch} 50%,${P[id].trim} 50%)` : P[id].swatch;
   const plural = n => `${n} item${n === 1 ? "" : "s"}`;
   const shake = el => { el.classList.remove("shake"); void el.offsetWidth; el.classList.add("shake"); };
   const esc = t => String(t).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
@@ -1664,7 +1725,7 @@ main:focus{outline:none}
       <button class="card-media" type="button" aria-label="View ${p.name} details" data-cursor="View">
         <img class="cm-a" src="${p.images[0]}" alt="FIDENTIAL ${p.name} gym shorts in ${p.colour.toLowerCase()}" width="1000" height="1500" loading="lazy" decoding="async">
         <img class="cm-b" src="${p.images[1] || p.images[0]}" alt="" width="1000" height="1500" loading="lazy" decoding="async">
-        <span class="card-tag">${p.idx} · ${p.colour}</span>
+        <span class="card-tag">${p.idx} · ${p.colour}${p.badge ? `<b>${esc(p.badge)}</b>` : ""}</span>
         <span class="card-sale" data-when="teaser live"><i class="sale-dot"></i><span data-deal="card"></span></span>
       </button>
       <div class="card-body">
@@ -2272,7 +2333,7 @@ main:focus{outline:none}
     // options that come from the store
     $("#rvPicks").innerHTML = IDS.map(id => {
       const p = P[id];
-      return `<label class="rv-pick"><input type="radio" name="product" value="${id}"><span><img src="${p.images[0]}" alt="" width="48" height="60" loading="lazy" decoding="async"><span><b>${p.name}</b><small><i class="sw" style="--sw:${p.swatch}"></i>${p.colour}</small></span><i class="rv-tick">${TICK}</i></span></label>`;
+      return `<label class="rv-pick"><input type="radio" name="product" value="${id}"><span><img src="${p.images[0]}" alt="" width="48" height="60" loading="lazy" decoding="async"><span><b>${p.name}</b><small><i class="sw" style="--sw:${swatchOf(id)}"></i>${p.colour}</small></span><i class="rv-tick">${TICK}</i></span></label>`;
     }).join("");
     $("#rvSizes").innerHTML = SIZES.map(sz => `<label class="rv-opt"><input type="radio" name="size" value="${sz}" aria-label="Size ${sz}, waist ${STORE.sizes[sz].waist} inches"><span class="size">${sz}<small>${STORE.sizes[sz].waist}"</small></span></label>`).join("");
 
@@ -2594,7 +2655,7 @@ main:focus{outline:none}
       }).join("");
       const fits = FITS.map(f => pool.filter(r => r.fit === f).length), fn = fits.reduce((a, b) => a + b, 0), top = fits.indexOf(Math.max(...fits));
       $("#rvFitSum").innerHTML = fn ? `<span class="mono">Fit, from ${fn} review${fn === 1 ? "" : "s"}</span><b>${FITS[top]}</b><div class="rv-fitline">${["Small", "True", "Big"].map((l, i) => `<span class="${i === top ? "on" : ""}">${l} ${Math.round(fits[i] / fn * 100)}%</span>`).join("")}</div>` : "";
-      $("#rvFilter").innerHTML = [["all", "All pairs"], ...IDS.map(id => [id, P[id].name])].map(([k, l]) => `<button type="button" data-f="${k}" aria-pressed="${k === filt}">${P[k] ? `<i class="sw" style="--sw:${P[k].swatch}"></i>` : ""}${l}</button>`).join("");
+      $("#rvFilter").innerHTML = [["all", "All pairs"], ...IDS.map(id => [id, P[id].name])].map(([k, l]) => `<button type="button" data-f="${k}" aria-pressed="${k === filt}">${P[k] ? `<i class="sw" style="--sw:${swatchOf(k)}"></i>` : ""}${l}</button>`).join("");
       const list = pool.filter(r => !starF || r.rating === starF);
       $("#rvList").innerHTML = list.slice(0, shown).map(item).join("");
       $("#rvMore").hidden = list.length <= shown;
@@ -2705,7 +2766,7 @@ main:focus{outline:none}
     const sel = [{ id: IDS[0], size: null }, { id: IDS[1] || IDS[0], size: null }];
     function renderPair(focus) {
       rows.forEach((row, k) => {
-        $(".pair-cols", row).innerHTML = IDS.map(id => `<button type="button" style="--sw:${P[id].swatch}" data-id="${id}" aria-pressed="${sel[k].id === id}" aria-label="${P[id].name}" title="${P[id].name}"></button>`).join("");
+        $(".pair-cols", row).innerHTML = IDS.map(id => `<button type="button" style="--sw:${swatchOf(id)}" data-id="${id}" aria-pressed="${sel[k].id === id}" aria-label="${P[id].name}" title="${P[id].name}"></button>`).join("");
         renderSizes($(".sizes", row), sel[k].id, sel[k].size, sz => { sel[k].size = sz; note.textContent = ""; renderPair([k, "size"]); }, false);
       });
       if (focus) { const row = rows[focus[0]], el = focus[1] === "size" ? $('.size[aria-checked="true"]', row) : $('.pair-cols [aria-pressed="true"]', row); if (el) el.focus({ preventScroll: true }); }
@@ -3186,7 +3247,7 @@ function hero() {
     // the photos download while the fonts and logo for the printed artwork load
     return building[id] = Promise.all([loadTex(p.hero, true), loadTex(p.depth), fontsReady, logoReady]).then(([photo, depth, , logo]) => {
       const [pc, ac] = drawSet(id, logo);
-      const hex = parseInt(p.swatch.slice(1), 16), sw = [hex >> 16, hex >> 8 & 255, hex & 255].map(v => 1 - (1 - v / 255) * .08);
+      const hex = parseInt((p.trim || p.swatch).slice(1), 16), sw = [hex >> 16, hex >> 8 & 255, hex & 255].map(v => 1 - (1 - v / 255) * .08);
       return sets[id] = { photo, depth, print: canvasTex(pc), aux: canvasTex(ac), tint: sw };
     });
   }
@@ -3356,12 +3417,15 @@ function cloth(host) {
   const scene = new THREE.Scene();
   const cam = new THREE.PerspectiveCamera(30, 1, .1, 100);
   cam.position.set(0, 0, 8);
-  const COLORS = { "black-panther": new THREE.Color(.13, .125, .12), "blue-sky": new THREE.Color(.07, .11, .36) };
+  const COLORS = { "black-panther": new THREE.Color(.13, .125, .12), "blue-sky": new THREE.Color(.07, .11, .36), "shadow-beige": new THREE.Color(.13, .125, .12) };
+  const TRIMS = { "shadow-beige": new THREE.Color(.45, .395, .35) };   // two-tone pairs: the waistband colour
   const logo = new THREE.TextureLoader().load("img/logo_white.png");
   logo.anisotropy = 8;
   const PW = 3.8, PH = 2.65;
+  const first = window.__fdnCloth || "black-panther";
   const uni = {
-    uTime: { value: 0 }, uColor: { value: COLORS[window.__fdnCloth || "black-panther"].clone() },
+    uTime: { value: 0 }, uColor: { value: COLORS[first].clone() },
+    uTrim: { value: (TRIMS[first] || TRIMS["shadow-beige"]).clone() }, uTrimAmt: { value: TRIMS[first] ? 1 : 0 },
     uPointer: { value: new THREE.Vector2(99, 99) }, uPower: { value: 0 }, uLogo: { value: logo },
     uSize: { value: new THREE.Vector2(PW, PH) }
   };
@@ -3396,7 +3460,7 @@ function cloth(host) {
         gl_Position = projectionMatrix * mv;
       }`,
     fragmentShader: `
-      uniform vec3 uColor; uniform sampler2D uLogo; uniform vec2 uSize;
+      uniform vec3 uColor, uTrim; uniform float uTrimAmt; uniform sampler2D uLogo; uniform vec2 uSize;
       varying vec2 vUv; varying vec3 vN; varying vec3 vV;
       ${NOISE}
       void main(){
@@ -3416,6 +3480,15 @@ function cloth(host) {
         col = mix(col, vec3(0.62)*(0.4 + 0.7*d1), (l1 + l2) * st * 0.7);
         float fold = 1.0 - smoothstep(0.0, 0.006, abs(vUv.y - 0.11));
         col *= 1.0 - fold*0.35;
+        // two-tone pairs: a ribbed waistband across the top, joined by a stitched seam
+        if (uTrimAmt > 0.001) {
+          float band = smoothstep(0.858, 0.862, vUv.y) * uTrimAmt;
+          vec3 tb = uTrim * (0.9 + 0.2*grain) * (0.955 + 0.045*sin(vUv.x*uSize.x*70.0));
+          col = mix(col, tb * (0.08 + 1.5*d1 + 0.45*d2) + vec3(1.0)*(sheen*0.2 + spec*0.22), band);
+          col *= 1.0 - (1.0 - smoothstep(0.0, 0.003, abs(vUv.y - 0.86))) * 0.45 * uTrimAmt;
+          float l3 = 1.0 - smoothstep(0.0, 0.0022, abs(vUv.y - 0.842));
+          col = mix(col, vec3(0.62)*(0.4 + 0.7*d1), l3 * st * 0.7 * uTrimAmt);
+        }
         // wordmark near the hem, as on the shorts
         vec2 luv = (vUv - vec2(0.58, 0.15)) / vec2(0.32, 0.0545);
         float la = 0.0;
@@ -3471,8 +3544,15 @@ function cloth(host) {
     ry = nd.x * .22; rx = -nd.y * .12;
   });
 
-  let colTarget = uni.uColor.value.clone();
-  addEventListener("fdn:cloth", e => { if (COLORS[e.detail]) { colTarget = COLORS[e.detail].clone(); uni.uPower.value = 1; uni.uPointer.value.set(0, 0); if (reduce) frame(); } });
+  let colTarget = uni.uColor.value.clone(), trimTarget = uni.uTrimAmt.value;
+  addEventListener("fdn:cloth", e => {
+    if (!COLORS[e.detail]) return;
+    colTarget = COLORS[e.detail].clone();
+    trimTarget = TRIMS[e.detail] ? 1 : 0;
+    if (TRIMS[e.detail]) uni.uTrim.value.copy(TRIMS[e.detail]);
+    uni.uPower.value = 1; uni.uPointer.value.set(0, 0);
+    if (reduce) frame();
+  });
 
   let on = false, raf = 0;
   const clock = new THREE.Clock();
@@ -3482,6 +3562,7 @@ function cloth(host) {
     uni.uTime.value = t;
     uni.uPower.value *= .975;
     uni.uColor.value.lerp(colTarget, reduce ? 1 : .06);
+    uni.uTrimAmt.value += (trimTarget - uni.uTrimAmt.value) * (reduce ? 1 : .06);
     mesh.rotation.y += (.36 + ry + Math.sin(t * .4) * .06 - mesh.rotation.y) * .04;
     mesh.rotation.x += (-.3 + rx - mesh.rotation.x) * .04;
     mesh.position.y = Math.sin(t * .7) * .05;

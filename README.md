@@ -56,7 +56,7 @@ Only publish real reviews from customers who chose "Public review". You can fix 
 Instagram (`@fidential_official`) and Facebook appear in the footer, the mobile menu and the thank-you screen after a review, and in the search-engine data at the top of `index.html`. To change a link, search `index.html` for `instagram.com/fidential_official` or `facebook.com/profile.php` and replace every match.
 
 ## The hero hang tag
-The hero is a 3D clothing hang tag hanging from a cord. Visitors drag (or swipe) to spin it, tap to flip it over, and the colourway buttons spin it round to the other pair. The front shows the `*_hero.webp` cutout inside a window, with the depth map giving it real depth as the tag tilts. The back is a spec sheet.
+The hero is a 3D clothing hang tag hanging from a cord. Visitors drag (or swipe) to spin it, tap to flip it over, and the colourway buttons spin it round to another pair. The front shows the `*_hero.webp` cutout inside a window, with the depth map giving it real depth as the tag tilts. The back is a spec sheet.
 
 Everything printed on the tag (name, colour, price, sizes, waist ranges) is drawn from the `STORE` block, so it stays in sync when you edit prices or sizes. If a device can't run the 3D smoothly (no WebGL, or no graphics chip, so the 3D would run in software), the hero shows the cutout on a flat card instead.
 
@@ -68,7 +68,8 @@ const STORE = {
   whatsapp: "94779313890",   // WhatsApp number: country code + number, no "+" or spaces
   products: {
     "black-panther": { ..., price: 2900, stock: { S: 26, M: 5, L: 1 } },
-    "blue-sky":      { ..., price: 2900, stock: { S: 7,  M: 1, L: 1 } }
+    "blue-sky":      { ..., price: 2900, stock: { S: 7,  M: 1, L: 1 } },
+    "shadow-beige":  { ..., trim: "#d2b8a2", badge: "New", price: 2900, stock: { S: 0, M: 19, L: 12 } }
   },
   sizes: { ... },
   reviews: { formspree: "meaalldw", published: [ ... ] }
@@ -76,9 +77,12 @@ const STORE = {
 ```
 
 - **WhatsApp number**: change `whatsapp`. Also update the number in the footer (search for `+94 77 931 3890` and `wa.me/94779313890`) and the `telephone` in the search-engine data at the top of the file.
-- **Prices**: change `price`. The hero, cards, cart and WhatsApp message all read from it. A few places are plain text, so search for `2,900` and `2900` and update them too: the fabric spec list, the page description at the top, and the two `"price": "2900"` lines in the search-engine data.
-- **Stock**: change `stock`. Sizes at 0 show as sold out, 1 shows "Last one", and 5 or fewer show "Low stock". Customers can't add more than the stock number. If a whole pair sells out, also change its `"availability"` in the search-engine data to `"https://schema.org/OutOfStock"`.
-- **Photos**: replace files in `img/` with the same names (`bp_1.webp`… for Black Panther, `bs_1.webp`… for Blue Sky). Use WebP, about 1000 px wide and under 100 KB, so pages stay fast. The hang tag uses each product's `hero` and `depth` files: a new cutout needs a matching 2:3 depth map (white = nearest), also saved as WebP.
+- **Prices**: change `price`. The hero, cards, cart and WhatsApp message all read from it. A few places are plain text, so search for `2,900` and `2900` and update them too: the fabric spec list, the page description at the top, and the three `"price": "2900"` lines in the search-engine data.
+- **Stock**: change `stock`. Sizes at 0 show as sold out, 1 shows "Last one", and 5 or fewer show "Low stock". Customers can't add more than the stock number. If a whole pair sells out, also change its `"availability"` in the search-engine data to `"https://schema.org/OutOfStock"`. Shadow Beige size S is set to 0 until its stock is confirmed.
+- **Photos**: replace files in `img/` with the same names (`bp_1.webp`… for Black Panther, `bs_1.webp`… for Blue Sky, `sb_1.webp`… for Shadow Beige). The first photo is the card picture and the second shows on hover. Use WebP, about 1000 px wide and under 100 KB, so pages stay fast. The hang tag uses each product's `hero` and `depth` files: a new cutout needs a matching 2:3 depth map (white = nearest), also saved as WebP.
+- **"New" label**: `badge: "New"` puts a small label on the Shadow Beige card. Delete it when the pair is no longer new.
+- **Two-tone pairs**: `trim` is the second colour (Shadow Beige's beige waistband and side panels). It splits the colour dot, tints the hang tag, and adds the waistband to the fabric scene.
+- **Adding a pair**: add an entry to `products` with its photos in `img/`. The cards, gallery, cart, product window, pair builder and review form pick it up by themselves. A few places are written out by hand, so search for `shadow-beige` and copy each one: the hero colourway buttons, the fabric buttons and the fabric scene's `COLORS`, the closing "Which pair is yours?" buttons, the footer Shop links and the search-engine data. Also update the "Pick your pair" step, the page description, `sitemap.xml` and `img/og.jpg`, the link-preview picture.
 
 ## The 11.11 sale
 The sale is set in the `STORE` block:
@@ -107,7 +111,7 @@ Already in place:
 - A page title and description aimed at "gym shorts" and "activewear" in Sri Lanka.
 - A main heading that says what the site sells, descriptive image text, and a canonical address.
 - Link previews for WhatsApp, Instagram, Facebook and X, using `img/og.jpg`.
-- Search-engine data (schema.org) for the brand, its Instagram, Facebook and WhatsApp, and both pairs with price and stock. Review stars are added once reviews are published.
+- Search-engine data (schema.org) for the brand, its Instagram, Facebook and WhatsApp, and every pair with price and stock. Review stars are added once reviews are published.
 - `sitemap.xml`, `robots.txt`, favicons and app icons.
 
 After the site goes live:
