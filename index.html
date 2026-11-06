@@ -952,8 +952,24 @@ main:focus{outline:none}
   *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;transition-delay:0s !important;scroll-behavior:auto !important}
 }
 </style>
+<!-- Meta Pixel (dataset "FIDENTIAL Website", ID 1806991788101680). PageView fires here; ViewContent, AddToCart and
+     InitiateCheckout fire from the shop script (search "Meta Pixel"). There is no Purchase event on purpose:
+     payment happens later in WhatsApp, so the WhatsApp button counts as InitiateCheckout, not a sale. -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1806991788101680');
+fbq('track', 'PageView');
+</script>
+<!-- End Meta Pixel -->
 </head>
 <body>
+<noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=1806991788101680&amp;ev=PageView&amp;noscript=1"></noscript>
 <a class="skip" href="#top">Skip to content</a>
 
 <div id="loader" aria-hidden="true">
@@ -1916,6 +1932,13 @@ main:focus{outline:none}
     li.animate([{ height: li.offsetHeight + "px", opacity: 1 }, { height: "0px", opacity: 0, paddingTop: "0px", paddingBottom: "0px" }], { duration: 320, easing: "cubic-bezier(.65,0,.35,1)", fill: "forwards" }).onfinish = done;
   }
 
+  // Meta Pixel: one guarded call per event. Tracking must never stop the shop from working, so if the
+  // pixel is blocked or not loaded this does nothing. Values are in LKR at the price the customer sees.
+  function px(ev, data) {
+    try { if (window.fbq) window.fbq("track", ev, Object.assign({ currency: "LKR", content_type: "product" }, data)); } catch (e) {}
+  }
+  function pxUnit(id) { return window.FDN_SALE ? window.FDN_SALE.unit(id) : P[id].price; }
+
   function addToCart(id, size, qty, srcEl) {
     const avail = left(id, size);
     if (avail <= 0) { flashPill("Not available", `No more ${P[id].name} in size ${size} right now`, P[id].images[0]); return false; }
@@ -1923,6 +1946,7 @@ main:focus{outline:none}
     const ex = cart.find(l => l.id === id && l.size === size);
     if (ex) ex.qty += n; else cart.push({ id, size, qty: n });
     commit();
+    px("AddToCart", { content_ids: [id], content_name: P[id].name, contents: [{ id, quantity: n }], value: pxUnit(id) * n });
     fly(srcEl, P[id].images[0]);
     flashPill("Added to cart", `${P[id].name} · Size ${size}${n > 1 ? ` × ${n}` : ""}${n < qty ? ` (only ${n} left)` : ""}`, P[id].images[0]);
     announce(`Added ${P[id].name}, size ${size}, to cart.`);
@@ -2025,6 +2049,7 @@ main:focus{outline:none}
   waBtn.addEventListener("click", e => {
     if (!cart.length) { e.preventDefault(); return; }
     updateWa();
+    px("InitiateCheckout", { content_ids: cart.map(l => l.id), contents: cart.map(l => ({ id: l.id, quantity: l.qty })), num_items: cart.reduce((a, l) => a + l.qty, 0), value: priceOf(cart).total });
     save("fdn_last_order", { no: orderNo, at: Date.now(), items: cart.map(l => ({ id: l.id, size: l.size })) });
     setTimeout(() => setView("sent", true), 350);
   });
@@ -2060,6 +2085,7 @@ main:focus{outline:none}
     if (!P[id]) return;
     if (cartEl.classList.contains("open")) closeCart(true); else if (!pmOpen) lastFocus = document.activeElement;
     const p = P[id];
+    px("ViewContent", { content_ids: [id], content_name: p.name, value: pxUnit(id) });
     Object.assign(pm, { id, size: null, qty: 1 });
     $("#pmIdx").textContent = `${p.idx} · ${p.colour}`;
     $("#pmName").textContent = p.name;
