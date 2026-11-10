@@ -417,6 +417,7 @@ main:focus{outline:none}
 .fit-size{font-family:var(--f-display);font-size:clamp(110px,14vw,200px);line-height:.8;margin:0}
 .fit-note{margin:0 0 10px;color:var(--mute);max-width:32ch}
 .fit-note b{color:var(--chalk);font-weight:600}
+.fit-stock{display:block;margin-top:10px;font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--chalk)}
 .chart{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
 .chart th,.chart td{text-align:left;padding:13px 10px;border-bottom:1px solid var(--line)}
 .chart th{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);font-weight:400}
@@ -1557,7 +1558,7 @@ fbq('track', 'PageView');
         short: "Classic black with a minimal, sporty look.",
         images: ["img/bp_1.webp", "img/bp_2.webp", "img/bp_3.webp"],
         hero: "img/bp_hero.webp", depth: "img/bp_depth.webp",   // 3D hang tag photo (cut-out) and its depth map
-        stock: { S: 26, M: 5, L: 1 }      // stock snapshot 27 Oct 2026, update as it changes
+        stock: { S: 26, M: 5, L: 0 }      // 10 Nov 2026: L sold out (S and M counts from 27 Oct), update as it changes
       },
       "blue-sky": {
         name: "Blue Sky", idx: "02", colour: "Blue", swatch: "#24368e", price: 2900,
@@ -1565,7 +1566,7 @@ fbq('track', 'PageView');
         short: "A distinctive blue with a modern activewear look.",
         images: ["img/bs_1.webp", "img/bs_2.webp", "img/bs_3.webp"],
         hero: "img/bs_hero.webp", depth: "img/bs_depth.webp",
-        stock: { S: 7, M: 1, L: 1 }
+        stock: { S: 7, M: 1, L: 0 }
       },
       "shadow-beige": {
         // "trim" is the second colour of a two-tone pair (beige waistband and side panels); "badge" adds a small label to its card
@@ -1574,7 +1575,7 @@ fbq('track', 'PageView');
         short: "Black with beige panels, a contemporary two-colour design.",
         images: ["img/sb_1.webp", "img/sb_2.webp", "img/sb_3.webp"],
         hero: "img/sb_hero.webp", depth: "img/sb_depth.webp",
-        stock: { S: 0, M: 19, L: 12 }    // size S not confirmed yet, so it shows as sold out
+        stock: { S: 0, M: 19, L: 12 }    // 10 Nov 2026: S sold out
       }
     },
     sizes: { S: { waist: "28–30", length: "15" }, M: { waist: "32–34", length: "16" }, L: { waist: "36–38", length: "16.5" } },
@@ -1646,8 +1647,17 @@ fbq('track', 'PageView');
 
   /* ===== state ===== */
   let cart = load("fdn_cart", []).filter(l => P[l.id] && STORE.sizes[l.size] && l.qty > 0);
-  cart.forEach(l => { l.qty = Math.min(l.qty, P[l.id].stock[l.size] ?? 0); });
+  // sizes that sold out since the bag was saved come out of it (or down to what's left), and the visitor is told once the intro has played
+  const changed = [];
+  cart.forEach(l => { const s = Math.max(0, P[l.id].stock[l.size] ?? 0); if (l.qty > s) { changed.push({ id: l.id, txt: `${P[l.id].name} ${l.size}${s ? `: only ${s} left` : " sold out"}` }); l.qty = s; } });
   cart = cart.filter(l => l.qty > 0);
+  if (changed.length) {
+    save("fdn_cart", cart);
+    addEventListener("fdn:intro", () => setTimeout(() => {
+      flashPill("Bag updated", changed.length === 1 ? changed[0].txt : `${changed.length} sizes sold out or ran low`, P[changed[0].id].images[0]);
+      announce(`Your bag was updated: ${changed.map(c => c.txt).join(", ")}.`);
+    }, 1200), { once: true });
+  }
   let orderNo = load("fdn_order", null);
   let current = "black-panther";
   let pastHero = false, pmOpen = false, view = "bag", lastFocus = null, typing = false;
@@ -1975,7 +1985,7 @@ fbq('track', 'PageView');
   }
 
   /* ===== floating pill ===== */
-  const pillMain = $("#pillMain"), pillSub = $("#pillSub"), pillImg = $("#pillImg");
+  const pillMain = $("#pillMain"), pillSub = $("#pillSub"), pillImg = $("#pillImg"), pillGo = $(".pill-go span", pill);
   let pillFlashing = false, pillT = 0;
   function pillSummary() {
     if (pillFlashing) return;
@@ -1994,6 +2004,9 @@ fbq('track', 'PageView');
       pill.style.transition = "none"; pill.classList.toggle("top", top); void pill.offsetWidth; pill.style.transition = "";
     }
     pill.classList.toggle("show", !blocked && (pillFlashing || (count() > 0 && pastHero)));
+    // a message can show with nothing in the bag (a size sold out): then the pill leads to the shop, not an empty bag
+    const go = count() ? "Checkout" : "Shop";
+    if (pillGo.textContent !== go) pillGo.textContent = go;
   }
   function flashPill(main, sub, img) {
     pillFlashing = true;
@@ -2038,7 +2051,7 @@ fbq('track', 'PageView');
     if (!silent) { syncLock(); pillState(); if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true }); }
   }
   $("#cartBtn").addEventListener("click", () => openCart());
-  pill.addEventListener("click", () => openCart());
+  pill.addEventListener("click", () => { if (count()) openCart(); else { endFlash(); goTo("#shop"); } });
   $("#cartClose").addEventListener("click", () => closeCart());
   scrim.addEventListener("click", () => closeCart());
   $("#emptyShop").addEventListener("click", () => { closeCart(); goTo("#shop"); });
@@ -2350,6 +2363,9 @@ fbq('track', 'PageView');
       else if (w < 36) { s = "L"; msg = `<b>You're between M and L.</b> Take L for a relaxed fit.`; }
       else if (w <= 38) { s = "L"; msg = `<b>Size L fits you.</b> Waist 36–38 in, length 16.5 in.`; }
       else { s = "L"; msg = `<b>L is our largest size</b> (36–38 in waist). Message us on WhatsApp and we'll help with fit.`; }
+      // say which colours have the size, so a sold-out size isn't a surprise in the shop
+      const have = IDS.filter(id => (P[id].stock[s] ?? 0) > 0).map(id => P[id].name);
+      if (have.length < IDS.length) msg += ` <span class="fit-stock">${have.length ? `In stock in ${s}: ${have.join(", ")}` : `${s} is sold out in every colour`}</span>`;
       note.innerHTML = msg;
       rows.forEach(r => r.classList.toggle("on", r.dataset.s === s));
       if (s !== lastSize) {
@@ -3449,6 +3465,9 @@ function hero() {
   buildSet(cur).then(() => {
     applySet(cur);
     resize();
+    // compile the shaders in the background where the browser can (Chrome, Safari), so the loader keeps moving
+    return renderer.compileAsync(scene, cam).catch(() => {});
+  }).then(() => {
     glReady = true;
     host.classList.add("gl-on");
     window.__fdnStage && window.__fdnStage();
@@ -3474,16 +3493,28 @@ if (clothHost) {
   const io = new IntersectionObserver(es => { if (es[0].isIntersecting) { io.disconnect(); threeReady.then(() => cloth(clothHost), () => {}); } }, { rootMargin: "100% 0px" });
   io.observe(clothHost);
 }
-function cloth(host) {
+async function cloth(host) {
   let renderer;
   try { renderer = makeRenderer(host, 1.6); } catch (e) { return; }
+  // the scene is built in the next task and its shaders compile in the background, so starting it never stalls the shop while it scrolls past
+  await new Promise(r => setTimeout(r, 0));
   const scene = new THREE.Scene();
   const cam = new THREE.PerspectiveCamera(30, 1, .1, 100);
   cam.position.set(0, 0, 8);
   const COLORS = { "black-panther": new THREE.Color(.13, .125, .12), "blue-sky": new THREE.Color(.07, .11, .36), "shadow-beige": new THREE.Color(.13, .125, .12) };
   const TRIMS = { "shadow-beige": new THREE.Color(.45, .395, .35) };   // two-tone pairs: the waistband colour
-  const logo = new THREE.TextureLoader().load("img/logo_white.png");
+  // the wordmark is small here, so it is drawn about 1000 px wide: the full-size file would be a 3 MB upload to the GPU (only its alpha is used)
+  const logo = new THREE.Texture();
   logo.anisotropy = 8;
+  const logoImg = new Image();
+  logoImg.onload = () => {
+    const c = document.createElement("canvas");
+    c.width = Math.min(1024, logoImg.naturalWidth); c.height = Math.round(c.width * logoImg.naturalHeight / logoImg.naturalWidth);
+    c.getContext("2d").drawImage(logoImg, 0, 0, c.width, c.height);
+    logo.image = c; logo.needsUpdate = true;
+    if (reduce) frame();
+  };
+  logoImg.src = "img/logo_white.png";
   const PW = 3.8, PH = 2.65;
   const first = window.__fdnCloth || "black-panther";
   const uni = {
@@ -3623,7 +3654,7 @@ function cloth(host) {
     raf = 0;
     const t = reduce ? 2 : clock.getElapsedTime();
     uni.uTime.value = t;
-    uni.uPower.value *= .975;
+    uni.uPower.value = reduce ? 0 : uni.uPower.value * .975;   // the ripple is motion, so reduced motion never shows it frozen
     uni.uColor.value.lerp(colTarget, reduce ? 1 : .06);
     uni.uTrimAmt.value += (trimTarget - uni.uTrimAmt.value) * (reduce ? 1 : .06);
     mesh.rotation.y += (.36 + ry + Math.sin(t * .4) * .06 - mesh.rotation.y) * .04;
@@ -3632,6 +3663,7 @@ function cloth(host) {
     renderer.render(scene, cam);
     if (on && !reduce) raf = requestAnimationFrame(frame);
   }
+  await renderer.compileAsync(scene, cam).catch(() => {});
   // one loop at a time, even if the section leaves and comes back within a frame
   visible(host, v => { on = v; if (v && !raf) frame(); });
   frame();

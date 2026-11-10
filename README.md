@@ -67,8 +67,8 @@ Open `index.html` and find the `STORE` block at the top of the first `<script>`:
 const STORE = {
   whatsapp: "94779313890",   // WhatsApp number: country code + number, no "+" or spaces
   products: {
-    "black-panther": { ..., price: 2900, stock: { S: 26, M: 5, L: 1 } },
-    "blue-sky":      { ..., price: 2900, stock: { S: 7,  M: 1, L: 1 } },
+    "black-panther": { ..., price: 2900, stock: { S: 26, M: 5, L: 0 } },
+    "blue-sky":      { ..., price: 2900, stock: { S: 7,  M: 1, L: 0 } },
     "shadow-beige":  { ..., trim: "#d2b8a2", badge: "New", price: 2900, stock: { S: 0, M: 19, L: 12 } }
   },
   sizes: { ... },
@@ -78,7 +78,7 @@ const STORE = {
 
 - **WhatsApp number**: change `whatsapp`. Also update the number in the footer (search for `+94 77 931 3890` and `wa.me/94779313890`) and the `telephone` in the search-engine data at the top of the file.
 - **Prices**: change `price`. The hero, cards, cart and WhatsApp message all read from it. A few places are plain text, so search for `2,900` and `2900` and update them too: the fabric spec list, the page description at the top, and the three `"price": "2900"` lines in the search-engine data (during the 11.11 sale they sit inside each `priceSpecification`, next to the sale price).
-- **Stock**: change `stock`. Sizes at 0 show as sold out, 1 shows "Last one", and 5 or fewer show "Low stock". Customers can't add more than the stock number. If a whole pair sells out, also change its `"availability"` in the search-engine data to `"https://schema.org/OutOfStock"`. Shadow Beige size S is set to 0 until its stock is confirmed.
+- **Stock**: change `stock`. Sizes at 0 show as sold out, 1 shows "Last one", and 5 or fewer show "Low stock". Customers can't add more than the stock number. If a whole pair sells out, also change its `"availability"` in the search-engine data to `"https://schema.org/OutOfStock"`. The fit finder lists which colours have the size it recommends, and a visitor whose saved bag holds a size that has since sold out gets a short "Bag updated" notice.
 - **Photos**: replace files in `img/` with the same names (`bp_1.webp`… for Black Panther, `bs_1.webp`… for Blue Sky, `sb_1.webp`… for Shadow Beige). The first photo is the card picture and the second shows on hover. Use WebP, about 1000 px wide and under 100 KB, so pages stay fast. The hang tag uses each product's `hero` and `depth` files: a new cutout needs a matching 2:3 depth map (white = nearest), also saved as WebP.
 - **"New" label**: `badge: "New"` puts a small label on the Shadow Beige card. Delete it when the pair is no longer new.
 - **Two-tone pairs**: `trim` is the second colour (Shadow Beige's beige waistband and side panels). It splits the colour dot, tints the hang tag, and adds the waistband to the fabric scene.
