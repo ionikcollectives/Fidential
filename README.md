@@ -5,7 +5,7 @@ Static site for https://www.fidential.shop, hosted on Vercel. There is no build 
 ## Files
 The site is the whole repo: Vercel publishes it as it is. File paths in this README start from the repo folder.
 - `index.html`: the whole site (HTML, CSS and JavaScript).
-- `img/`: product photos, hang-tag cutouts (`*_hero.webp`) and their depth maps (`*_depth.webp`), the white logo, the link-preview images (`og.jpg`, and `og-sale.jpg` during the 11.11 sale), the square logo for search engines (`logo-512.png`) and app icons.
+- `img/`: product photos, hang-tag cutouts (`*_hero.webp`) and their depth maps (`*_depth.webp`), the white logo, the link-preview images (`og.jpg`, and `og-black-friday.jpg` during the Black Friday sale), the square logo for search engines (`logo-512.png`) and app icons.
 - `fonts/`: the three typefaces (Archivo, Black Ops One and Geist Mono), from Google Fonts under the SIL Open Font License.
 - `vendor/`: the libraries the site runs on: Three.js for the 3D, GSAP for animation and Lenis for smooth scrolling.
 - `404.html`: the "page not found" page.
@@ -77,43 +77,45 @@ const STORE = {
 ```
 
 - **WhatsApp number**: change `whatsapp`. Also update the number in the footer (search for `+94 77 931 3890` and `wa.me/94779313890`) and the `telephone` in the search-engine data at the top of the file.
-- **Prices**: change `price`. The hero, cards, cart and WhatsApp message all read from it. A few places are plain text, so search for `2,900` and `2900` and update them too: the fabric spec list, the page description at the top, and the three `"price": "2900"` lines in the search-engine data (during the 11.11 sale they sit inside each `priceSpecification`, next to the sale price).
+- **Prices**: change `price`. The hero, cards, cart and WhatsApp message all read from it. A few places are plain text, so search for `2,900` and `2900` and update them too: the fabric spec list, the page description at the top, and the three `"price": "2900"` lines in the search-engine data (during a sale they sit inside each `priceSpecification`, next to the sale price).
 - **Stock**: change `stock`. Sizes at 0 show as sold out, 1 shows "Last one", and 5 or fewer show "Low stock". Customers can't add more than the stock number. If a whole pair sells out, also change its `"availability"` in the search-engine data to `"https://schema.org/OutOfStock"`. The fit finder lists which colours have the size it recommends, and a visitor whose saved bag holds a size that has since sold out gets a short "Bag updated" notice.
 - **Photos**: replace files in `img/` with the same names (`bp_1.webp`… for Black Panther, `bs_1.webp`… for Blue Sky, `sb_1.webp`… for Shadow Beige). The first photo is the card picture and the second shows on hover. Use WebP, about 1000 px wide and under 100 KB, so pages stay fast. The hang tag uses each product's `hero` and `depth` files: a new cutout needs a matching 2:3 depth map (white = nearest), also saved as WebP.
 - **"New" label**: `badge: "New"` puts a small label on the Shadow Beige card. Delete it when the pair is no longer new.
 - **Two-tone pairs**: `trim` is the second colour (Shadow Beige's beige waistband and side panels). It splits the colour dot, tints the hang tag, and adds the waistband to the fabric scene.
-- **Adding a pair**: add an entry to `products` with its photos in `img/`. The cards, gallery, cart, product window, pair builder and review form pick it up by themselves. A few places are written out by hand, so search for `shadow-beige` and copy each one: the hero colourway buttons, the fabric buttons and the fabric scene's `COLORS`, the closing "Which pair is yours?" buttons, the footer Shop links and the search-engine data. Also update the "Pick your pair" step, the page description, `sitemap.xml` and the link-preview pictures `img/og.jpg` and `img/og-sale.jpg`.
+- **Adding a pair**: add an entry to `products` with its photos in `img/`. The cards, gallery, cart, product window, pair builder and review form pick it up by themselves. A few places are written out by hand, so search for `shadow-beige` and copy each one: the hero colourway buttons, the fabric buttons and the fabric scene's `COLORS`, the closing "Which pair is yours?" buttons, the footer Shop links and the search-engine data. Also update the "Pick your pair" step, the page description, `sitemap.xml` and the link-preview pictures `img/og.jpg` and `img/og-black-friday.jpg`.
 
-## The 11.11 sale
+## The sale (Black Friday)
 The sale is set in the `STORE` block:
 
 ```js
-sale: { starts: "2026-11-07T00:00:00+05:30", ends: "2026-11-15T00:00:00+05:30", dates: "7–14 November", one: 2499, two: 3999 },
+sale: { name: "Black Friday", starts: "2026-11-22T00:00:00+05:30", ends: "2026-11-30T00:00:00+05:30", dates: "22–29 November", one: 2499, two: 3999 },
 ```
 
-The sale runs from 7 November, 00:00, until the end of 14 November, Sri Lanka time. `ends` is midnight at the start of 15 November. If you change the dates, also change `7–14 November`, `7–14 Nov` and `8 days only` in the page, the `validFrom` / `validThrough` dates in the search-engine data, and `img/og-sale.jpg`.
+Black Friday runs from Sunday 22 November, 00:00, until the end of Sunday 29 November, Sri Lanka time. `ends` is midnight at the start of 30 November. `name` is used everywhere the page names the sale: the menu, the hero chip, the ticker, the cart, the WhatsApp order and the sticker on the 3D tag. The day calendar, the start and end times and the countdown all come from `starts` and `ends`.
+
+If you change the dates or the name, also change the few places written out by hand: `22–29 November`, `22–29 Nov` and `8 days only` in the page, `Black` / `Friday` in the sale heading and behind the hero tag, the `validFrom` / `validThrough` dates in the search-engine data, and `img/og-black-friday.jpg`.
 
 The site switches on its own, by Sri Lanka time:
-- **Before `starts`**: a teaser. An "11.11" link in the menu, a countdown chip in the hero, and the sale section after the features strip, with a "Get it first on WhatsApp" button and an "Add to calendar" link. Prices stay at LKR 2,900.
-- **From `starts` until `ends`**: the sale is live. One short costs `one` (Rs. 2,499). Each pair, in any colours and sizes, costs `two` (Rs. 3,999), and an odd one out costs `one`, so three shorts are Rs. 6,498. The cards, hero, cart and WhatsApp order all show the sale price. The WhatsApp message lists the discount so the team can see how the total was worked out. With one short in the bag, the cart suggests adding a second for Rs. 1,500 more. In the sale section, "Build your pair" adds two shorts at once.
+- **Before `starts`**: a teaser. A "Black Friday" link in the menu, a countdown chip in the hero, and the sale section after the features strip: the eight sale days, the exact start and end, a countdown, a "Get it first on WhatsApp" button and an "Add to calendar" link. Prices stay at LKR 2,900.
+- **From `starts` until `ends`**: the sale is live. One short costs `one` (Rs. 2,499). Each pair, in any colours and sizes, costs `two` (Rs. 3,999), and an odd one out costs `one`, so three shorts are Rs. 6,498 and four are Rs. 7,998. The cards, hero, product window, cart and WhatsApp order all show the sale price. The WhatsApp message lists the discount so the team can see how the total was worked out. With one short in the bag, the cart suggests adding a second for Rs. 1,500 more. In the sale section, "Build your pair" adds two shorts at once, and the calendar crosses off the days that have passed and fills in today.
 - **After `ends`**: everything goes back to normal and the sale section disappears. The page title, description and search-engine prices switch back too.
 
 ### Search engines and link previews
 For the sale, the top of `index.html` advertises it:
-- **Page title and description** (what Google shows): "11.11 Sale 7–14 Nov: Gym Shorts 2 for Rs 3,999", with the sale price, the regular price and "up to 31% off".
-- **Link previews** (WhatsApp, Facebook, Instagram, X): a sale title and description, and the sale picture `img/og-sale.jpg`.
-- **Search-engine data**: each pair's offer has the sale price, Rs. 2,499, valid 7–14 November, and the regular Rs. 2,900 as the "strikethrough" price. Google can show the discount in results, and it knows the dates, so it stops showing the sale price after the 14th.
+- **Page title and description** (what Google shows): "Black Friday Sale 22–29 Nov: Gym Shorts 2 for Rs 3,999", with the sale price, the regular price and "up to 31% off".
+- **Link previews** (WhatsApp, Facebook, Instagram, X): a sale title and description, and the sale picture `img/og-black-friday.jpg`.
+- **Search-engine data**: each pair's offer has the sale price, Rs. 2,499, valid 22–29 November, and the regular Rs. 2,900 as the "strikethrough" price. Google can show the discount in results, and it knows the dates, so it stops showing the sale price after the 29th.
 - **The sale section**: the regular price, the sale price, the saving and the percentage, as plain text Google can read.
 
-After sharing the link, paste `https://www.fidential.shop/` into Facebook's Sharing Debugger (https://developers.facebook.com/tools/debug/) and click **Scrape Again**, so Facebook and Instagram show the sale preview straight away.
+After publishing, paste `https://www.fidential.shop/` into Facebook's Sharing Debugger (https://developers.facebook.com/tools/debug/) and click **Scrape Again**, so Facebook, Instagram and WhatsApp show the Black Friday preview instead of the old 11.11 one.
 
-### After the sale (from 15 November)
+### After the sale (from 30 November)
 The page switches its title and description back by itself, but link previews read the file directly. Tidy up when convenient:
-1. In the `<head>` of `index.html`, replace the `content` of each tag that has a `data-after` (the title, the description and the `og:` lines) with its `data-after` text, then delete the `data-after` attributes and the 11.11 comment above them.
+1. In the `<head>` of `index.html`, replace the `content` of each tag that has a `data-after` (the title, the description and the `og:` lines) with its `data-after` text, then delete the `data-after` attributes and the sale comment above them.
 2. In the search-engine data, replace each pair's `"priceSpecification": [ … ]` with `"price": "2900",`.
 3. Publish, then refresh the preview in Facebook's Sharing Debugger.
 
-The sale code itself can stay. It does nothing after `ends`.
+The sale code itself can stay. It does nothing after `ends`, and the next sale only needs new values in `STORE.sale` and the hand-written places above.
 
 To check each state before it happens, open a local or Vercel preview address with `?sale=teaser`, `?sale=live` or `?sale=off` on the end (for example `http://127.0.0.1:5500/index.html?sale=live`). This doesn't work on fidential.shop itself, so customers can't switch the sale on early.
 
@@ -129,8 +131,8 @@ The cart runs in three steps:
 Already in place:
 - A page title and description aimed at "gym shorts" and "activewear" in Sri Lanka.
 - A main heading that says what the site sells, descriptive image text, and a canonical address.
-- Link previews for WhatsApp, Instagram, Facebook and X, using `img/og.jpg` (`img/og-sale.jpg` during the 11.11 sale).
-- During the 11.11 sale: a sale title and description, and sale prices with the regular price struck through in the search-engine data (see The 11.11 sale).
+- Link previews for WhatsApp, Instagram, Facebook and X, using `img/og.jpg` (`img/og-black-friday.jpg` during the Black Friday sale).
+- During the Black Friday sale: a sale title and description, and sale prices with the regular price struck through in the search-engine data (see The sale).
 - Search-engine data (schema.org) for the brand, its Instagram, Facebook and WhatsApp, and every pair with price and stock. Review stars are added once reviews are published.
 - `sitemap.xml`, `robots.txt`, favicons and app icons.
 
