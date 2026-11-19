@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <!-- Black Friday sale: the title, description and link preview advertise the sale. data-after holds the everyday wording:
      once the sale ends the script switches the title and description back by itself; copy the og: lines back by hand (see README) -->
-<title data-after="FIDENTIAL | Premium Gym Shorts &amp; Activewear in Sri Lanka">Black Friday Sale 22–29 Nov: Gym Shorts 2 for Rs 3,999 | FIDENTIAL</title>
-<meta name="description" content="FIDENTIAL Black Friday sale, 22–29 November: premium gym shorts Rs 2,499 (was Rs 2,900), or any 2 for Rs 3,999, up to 31% off. Black Panther, Blue Sky and Shadow Beige. Order on WhatsApp." data-after="Premium Scuba-fabric gym shorts by FIDENTIAL, Sri Lanka. Black Panther, Blue Sky and Shadow Beige, sizes S–L, LKR 2,900. Order on WhatsApp in minutes.">
+<title data-after="FIDENTIAL | Premium Gym Shorts &amp; Activewear in Sri Lanka">Black Friday Sale Sri Lanka: Gym Shorts 2 for Rs 3,999 | FIDENTIAL</title>
+<meta name="description" content="Black Friday in Sri Lanka, 22–29 November: FIDENTIAL premium gym shorts Rs 2,499 (was Rs 2,900) or any 2 for Rs 3,999, up to 31% off. Black Panther, Blue Sky and Shadow Beige. Order on WhatsApp." data-after="Premium Scuba-fabric gym shorts by FIDENTIAL, Sri Lanka. Black Panther, Blue Sky and Shadow Beige, sizes S–L, LKR 2,900. Order on WhatsApp in minutes.">
 <link rel="canonical" href="https://www.fidential.shop/">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="theme-color" content="#070707">
@@ -29,10 +29,13 @@
 <!-- fonts (fonts/) and libraries (vendor/) are served from this site, so the first screen needs no other servers -->
 <link rel="preload" href="fonts/black-ops-one-v21-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/archivo-v25-latin.woff2" as="font" type="font/woff2" crossorigin>
+<!-- the Meta Pixel's servers: connecting early lets the pixel count ad visitors (landing page views) even if they leave quickly -->
+<link rel="preconnect" href="https://connect.facebook.net">
+<link rel="dns-prefetch" href="https://www.facebook.com">
 <!-- the 3D library and hang-tag photos are fetched by the script once the loader has painted -->
 <!-- search engines: the brand, the site and every pair. Keep price and stock in step with STORE below. Review stars are added from STORE.reviews.published.
-     Black Friday: each offer carries the sale price for 22–29 Nov (validFrom/validThrough) and the regular price as StrikethroughPrice, so Google can show the discount.
-     Once the sale ends the script puts back a plain "price" by itself; after the sale, replace each priceSpecification with "price": "2900" (see README) -->
+     Black Friday: each offer carries the sale price (with priceValidUntil, the last sale day) and the regular price as a StrikethroughPrice, so Google can show the discount.
+     Before the sale starts and once it ends, the script swaps in the plain regular price by itself; after the sale, also edit it here (see README) -->
 <script type="application/ld+json" id="ld">
 {
   "@context": "https://schema.org",
@@ -76,10 +79,9 @@
         "@type": "Offer",
         "url": "https://www.fidential.shop/#shop",
         "priceCurrency": "LKR",
-        "priceSpecification": [
-          { "@type": "UnitPriceSpecification", "price": "2499", "priceCurrency": "LKR", "validFrom": "2026-11-22T00:00:00+05:30", "validThrough": "2026-11-29T23:59:59+05:30" },
-          { "@type": "UnitPriceSpecification", "priceType": "https://schema.org/StrikethroughPrice", "price": "2900", "priceCurrency": "LKR" }
-        ],
+        "price": "2499",
+        "priceValidUntil": "2026-11-29",
+        "priceSpecification": { "@type": "UnitPriceSpecification", "priceType": "https://schema.org/StrikethroughPrice", "price": "2900", "priceCurrency": "LKR" },
         "availability": "https://schema.org/InStock",
         "itemCondition": "https://schema.org/NewCondition",
         "seller": { "@id": "https://www.fidential.shop/#org" }
@@ -101,10 +103,9 @@
         "@type": "Offer",
         "url": "https://www.fidential.shop/#shop",
         "priceCurrency": "LKR",
-        "priceSpecification": [
-          { "@type": "UnitPriceSpecification", "price": "2499", "priceCurrency": "LKR", "validFrom": "2026-11-22T00:00:00+05:30", "validThrough": "2026-11-29T23:59:59+05:30" },
-          { "@type": "UnitPriceSpecification", "priceType": "https://schema.org/StrikethroughPrice", "price": "2900", "priceCurrency": "LKR" }
-        ],
+        "price": "2499",
+        "priceValidUntil": "2026-11-29",
+        "priceSpecification": { "@type": "UnitPriceSpecification", "priceType": "https://schema.org/StrikethroughPrice", "price": "2900", "priceCurrency": "LKR" },
         "availability": "https://schema.org/InStock",
         "itemCondition": "https://schema.org/NewCondition",
         "seller": { "@id": "https://www.fidential.shop/#org" }
@@ -126,10 +127,9 @@
         "@type": "Offer",
         "url": "https://www.fidential.shop/#shop",
         "priceCurrency": "LKR",
-        "priceSpecification": [
-          { "@type": "UnitPriceSpecification", "price": "2499", "priceCurrency": "LKR", "validFrom": "2026-11-22T00:00:00+05:30", "validThrough": "2026-11-29T23:59:59+05:30" },
-          { "@type": "UnitPriceSpecification", "priceType": "https://schema.org/StrikethroughPrice", "price": "2900", "priceCurrency": "LKR" }
-        ],
+        "price": "2499",
+        "priceValidUntil": "2026-11-29",
+        "priceSpecification": { "@type": "UnitPriceSpecification", "priceType": "https://schema.org/StrikethroughPrice", "price": "2900", "priceCurrency": "LKR" },
         "availability": "https://schema.org/InStock",
         "itemCondition": "https://schema.org/NewCondition",
         "seller": { "@id": "https://www.fidential.shop/#org" }
@@ -771,6 +771,8 @@ main:focus{outline:none}
 .sale-on .hero::before{content:"";position:absolute;left:0;right:0;bottom:0;height:60%;background:radial-gradient(50% 60% at 50% 100%,rgba(var(--sale-rgb),.09),transparent 70%);pointer-events:none}
 .stage-sale{position:absolute;left:50%;top:50%;translate:-50% -52%;font-family:var(--f-display);font-size:min(16vw,26vh);line-height:.88;text-align:center;text-transform:uppercase;white-space:nowrap;color:transparent;-webkit-text-stroke:1px rgba(240,240,234,.1);-webkit-mask-image:linear-gradient(90deg,transparent,#000 28%,#000 72%,transparent);mask-image:linear-gradient(90deg,transparent,#000 28%,#000 72%,transparent);pointer-events:none;-webkit-user-select:none;user-select:none}
 .sale-chip{display:inline-flex;align-items:center;gap:10px;min-height:34px;padding:4px 4px 4px 12px;border:1px solid rgba(var(--sale-rgb),.38);background:linear-gradient(90deg,var(--sale-bg),rgba(var(--sale-rgb),0) 85%);font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;color:var(--chalk);transition:border-color .3s}
+.sale-chip .chip-txt{display:grid;gap:3px;padding:3px 0}
+.sale-chip small{font-size:10px;letter-spacing:.1em;color:var(--sale-soft)}
 .sale-chip b{font-weight:500;padding:5px 8px;background:var(--chalk);color:var(--ink);letter-spacing:.06em;font-variant-numeric:tabular-nums;white-space:nowrap}
 @media (hover:hover){.sale-chip:hover{border-color:var(--sale)}}
 .deal-line{display:flex;align-items:center;gap:10px;margin:0;font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;line-height:1.4;text-transform:uppercase;color:var(--sale-soft);text-decoration:none}
@@ -954,8 +956,10 @@ main:focus{outline:none}
   .pill{left:calc(12px + env(safe-area-inset-left,0px));right:calc(12px + env(safe-area-inset-right,0px));bottom:calc(12px + env(safe-area-inset-bottom,0px));min-width:0}
   .sec-head.row .look-nav{display:none}
   .ring-cap{display:grid;justify-content:stretch;gap:14px}
-  .ring-meta{grid-auto-flow:column;justify-content:space-between;align-items:center}
-  .ring-meta .mono{order:2}
+  .ring-meta{grid-auto-flow:column;grid-template-columns:minmax(0,1fr) auto;justify-content:space-between;align-items:center}
+  .ring-meta .mono{order:2;white-space:nowrap}
+  .ring-ticks{min-width:0;justify-self:stretch}
+  .ring-ticks button{width:auto;flex:0 1 28px;min-width:0}
 }
 @media (max-width:520px){
   .rv-picks,.rv-vis,.rv-pane .f2{grid-template-columns:minmax(0,1fr)}
@@ -1005,7 +1009,7 @@ fbq('track', 'PageView');
 
 <header class="hdr" id="hdr">
   <div class="wrap hdr-in">
-    <a class="brand" href="#top" aria-label="FIDENTIAL, back to top"><img src="img/logo_white.png" alt="FIDENTIAL" width="1271" height="148"></a>
+    <a class="brand" href="#top" aria-label="FIDENTIAL, back to top"><img src="img/logo_white-480.png" alt="FIDENTIAL" width="480" height="56"></a>
     <nav class="nav" aria-label="Main">
       <a class="nav-sale" href="#sale" data-when="teaser live" hidden><i class="sale-dot"></i>Black Friday</a>
       <a href="#shop">Shop</a>
@@ -1046,7 +1050,7 @@ fbq('track', 'PageView');
     </div>
     <div class="wrap hero-in">
       <div class="hero-copy">
-        <a class="sale-chip" href="#sale" data-when="teaser live" hidden><i class="sale-dot"></i><span data-deal="chip">Black Friday</span><b data-cd="short" aria-hidden="true"></b></a>
+        <a class="sale-chip" href="#sale" data-when="teaser live" hidden><i class="sale-dot"></i><span class="chip-txt"><span data-deal="chip">Black Friday</span><small data-deal="chip-deal">Any 2 for Rs. 3,999</small></span><b data-cd="short" aria-hidden="true"></b></a>
         <h1 class="hero-title"><span class="eyebrow">Premium gym shorts · Sri Lanka</span> <span class="ln"><span>Built to</span></span> <span class="ln"><span>perform.</span></span> <span class="ln"><span class="o">Styled to</span></span> <span class="ln"><span class="o">last.</span></span></h1>
         <p class="hero-sub">Scuba-fabric gym shorts with an elastic waistband and an adjustable drawstring.</p>
         <div class="hero-ctas">
@@ -1694,6 +1698,16 @@ fbq('track', 'PageView');
   const heroSize = {};
   const details = load("fdn_details", {});
 
+  // where the visitor came from: an ad link's utm_source / utm_campaign (or a Facebook or Instagram link), kept for 7 days and
+  // written at the end of the WhatsApp order, so orders from ads can be counted in the chat
+  const REF = (() => {
+    const clean = v => String(v || "").replace(/[^A-Za-z0-9_ .-]/g, "").trim().slice(0, 40);
+    const q = new URLSearchParams(location.search);
+    const v = [clean(q.get("utm_source")), clean(q.get("utm_campaign"))].filter(Boolean).join(" · ") || (q.has("fbclid") ? "facebook · instagram" : "");
+    if (v) { save("fdn_ref", { v, at: Date.now() }); return v; }
+    const r = load("fdn_ref", null);
+    return r && typeof r.v === "string" && Date.now() - r.at < 7 * 864e5 ? r.v.split(" · ").map(clean).filter(Boolean).join(" · ") : "";
+  })();
   const newOrderNo = () => {
     const d = new Date(), p = n => String(n).padStart(2, "0");
     return `FDN-${String(d.getFullYear()).slice(2)}${p(d.getMonth() + 1)}${p(d.getDate())}-${Math.floor(1000 + Math.random() * 9000)}`;
@@ -1792,6 +1806,9 @@ fbq('track', 'PageView');
   $$("#buybox .cw button").forEach(b => b.addEventListener("click", () => setProduct(b.dataset.p)));
   window.__fdnCurrent = current;
   renderBuybox();
+  // a link can name a pair (fidential.shop/#blue-sky, handy for an ad about one colour): the hero opens on that colour
+  const linked = decodeURIComponent(location.hash.slice(1));
+  if (P[linked]) setProduct(linked);
 
   /* ===== product cards ===== */
   const cardsEl = $("#cards");
@@ -1869,7 +1886,7 @@ fbq('track', 'PageView');
     } else {
       out.push("", "Name: Kavindu Perera", "City: Maharagama");
     }
-    out.push("", "Sent from the FIDENTIAL website");
+    out.push("", !sample && REF ? `Sent from the FIDENTIAL website (ref: ${REF})` : "Sent from the FIDENTIAL website");
     return out.join("\n");
   }
   function updateWa() {
@@ -1964,7 +1981,9 @@ fbq('track', 'PageView');
     else { closeCart(); goTo("#shop"); }
   });
   let refreshPair = () => {};   // the sale's pair picker, set up further down
-  function commit() { save("fdn_cart", cart); renderCart(); refreshQuick(); renderBuybox(); if (pm.id) renderPmSizes(); refreshPair(); }
+  // once an order has gone to WhatsApp, changing the bag starts a new order number, so two orders never share one
+  function freshOrderNo() { const last = load("fdn_last_order", null); if (last && last.no === orderNo) { orderNo = newOrderNo(); save("fdn_order", orderNo); } }
+  function commit() { freshOrderNo(); save("fdn_cart", cart); renderCart(); refreshQuick(); renderBuybox(); if (pm.id) renderPmSizes(); refreshPair(); }
   function removeLine(l, li) {
     const done = () => { const i = cart.indexOf(l); if (i > -1) cart.splice(i, 1); commit(); if (!cart.length) $("#emptyShop").focus({ preventScroll: true }); };
     if (reduce || !li.animate) return done();
@@ -1977,6 +1996,8 @@ fbq('track', 'PageView');
   function px(ev, data) {
     try { if (window.fbq) window.fbq("track", ev, Object.assign({ currency: "LKR", content_type: "product" }, data)); } catch (e) {}
   }
+  function pxLead(ev, name) { try { if (window.fbq) window.fbq("track", ev, name ? { content_name: name } : {}); } catch (e) {} }
+  $("#waChat").addEventListener("click", () => pxLead("Contact", "WhatsApp chat"));
   function pxUnit(id) { return window.FDN_SALE ? window.FDN_SALE.unit(id) : P[id].price; }
 
   function addToCart(id, size, qty, srcEl) {
@@ -2866,6 +2887,7 @@ fbq('track', 'PageView');
 
     // before the sale: get the offer first on WhatsApp (the stock plan's waitlist), or save the date
     $("#saleEarly").prepend($("#waBtn svg").cloneNode(true));
+    $("#saleEarly").addEventListener("click", () => pxLead("Lead", `${SALE.name} early access`));
     $("#saleEarly").href = `https://wa.me/${STORE.whatsapp}?text=${encodeURIComponent(`Hi FIDENTIAL, please send me the ${SALE.name} offer as soon as the sale opens (${SALE.dates}).`)}`;
     $("#saleCal").addEventListener("click", () => {
       const z = t => new Date(t).toISOString().replace(/[-:]/g, "").replace(/\.\d+/, "");
@@ -2918,13 +2940,23 @@ fbq('track', 'PageView');
       o.style.setProperty("--mx", `${e.clientX - r.left}px`); o.style.setProperty("--my", `${e.clientY - r.top}px`);
     }));
 
-    // after the sale: the everyday page title and description (kept in data-after), and plain prices in the search-engine data
+    // after the sale: the everyday page title and description (kept in data-after)
     function everyday() {
       $$("head [data-after]").forEach(el => { if (el.tagName === "TITLE") document.title = el.dataset.after; else el.content = el.dataset.after; el.removeAttribute("data-after"); });
+    }
+    // search engines see the sale price (and the regular one struck through) only while the sale is live, the plain regular price before and after
+    let ldSale = null;
+    function priceLD(live) {
       const ld = $("#ld");
+      if (ldSale === null) ldSale = ld.textContent;
+      if (live) { ld.textContent = ldSale; return; }
       try {
-        const data = JSON.parse(ld.textContent);
-        (data["@graph"] || []).forEach(n => { const o = n.offers, ps = o && o.priceSpecification; if (!ps) return; o.price = (ps.find(s => s.priceType) || ps[0]).price; delete o.priceSpecification; });
+        const data = JSON.parse(ldSale);
+        (data["@graph"] || []).forEach(n => {
+          const o = n.offers, ps = o && o.priceSpecification; if (!ps) return;
+          o.price = (Array.isArray(ps) ? ps.find(x => x.priceType) || ps[0] : ps).price;
+          delete o.priceSpecification; delete o.priceValidUntil;
+        });
         ld.textContent = JSON.stringify(data);
       } catch (e) {}
     }
@@ -2938,11 +2970,13 @@ fbq('track', 'PageView');
       set("line", teaser ? `<i class="sale-dot"></i><span>${SALE.name} from ${dayShort(SALE_START)} · <b>2 for ${fig.two}</b></span>` : `<i class="sale-dot"></i><span>${SALE.name} · <b>2 for ${fig.two}</b>, mix colours</span>`);
       set("card", teaser ? `${SALE.name} · ${dayShort(SALE_START)}` : `2 for ${fig.two}`);
       set("chip", teaser ? `${SALE.name} starts in` : `${SALE.name} ends in`);
+      set("chip-deal", `Any 2 for ${fig.two}`);
       set("cd-label", teaser ? "Starts in" : "Ends in");
       set("when", teaser ? `${SALE.dates} · ${days === 1 ? "One day" : days + " days"} only` : `Live now · Ends ${day(SALE_END - 1)}`);
       set("cd-sr", teaser ? `Starts ${day(SALE_START)} at midnight, Sri Lanka time.` : `Ends at midnight on ${day(SALE_END - 1)}, Sri Lanka time.`);
       $("#ldTag").textContent = on ? `${SALE.name} Sale` : "Built to perform";
       paintDays();
+      priceLD(salePhase === "live");
       if (salePhase === "off") everyday();
       $$("[data-price]").forEach(el => { el.innerHTML = priceHTML(el.dataset.price); });
       if (pm.id) $("#pmPrice").innerHTML = priceHTML(pm.id);
@@ -3067,7 +3101,10 @@ fbq('track', 'PageView');
   let seen = false;
   // the full intro plays once a day; visitors back within 24 hours get the quick version
   try { seen = Date.now() - (+localStorage.getItem("fdn_intro") || 0) < 864e5; localStorage.setItem("fdn_intro", String(Date.now())); } catch (e) {}
-  const minT = seen ? 350 : 900;
+  // visitors from an ad, or inside the Facebook or Instagram app, get the quick intro too: they came for the offer
+  const fromAd = /[?&](utm_[a-z]+|fbclid|gclid)=/i.test(location.search) || /FBAN|FBAV|FB_IAB|Instagram/i.test(navigator.userAgent);
+  const quick = seen || fromAd;
+  const minT = quick ? 350 : 900, maxT = quick ? 1400 : 2000;
   let heroReady = false, introDone = false, finished = false;
   addEventListener("fdn:heroready", () => { heroReady = true; });
   function intro() {
@@ -3085,7 +3122,7 @@ fbq('track', 'PageView');
     window.__fdnFallback();
     // opened from a link like fidential.shop/#reviews: land there once the page has settled
     const dest = location.hash.length > 1 && document.getElementById(location.hash.slice(1));
-    if (dest) setTimeout(() => goTo("#" + dest.id), seen ? 700 : 1300);
+    if (dest) setTimeout(() => goTo("#" + (dest.hidden ? "shop" : dest.id)), quick ? 700 : 1300);
     con.classList.add("strike");
     const end = () => {
       if (hasGsap && !reduce) {
@@ -3095,10 +3132,11 @@ fbq('track', 'PageView');
           .fromTo(con, { x: 0, clipPath: "inset(0% 0% 0% 0%)" }, { x: half, clipPath: "inset(0% 100% 0% 0%)", duration: .7, ease: "expo.inOut" })
           .to("#ldFid", { x: -half, duration: .7, ease: "expo.inOut" }, 0)
           .to(ld, { clipPath: "inset(0 0 100% 0)", duration: .85, ease: "expo.inOut", onStart: intro }, "+=.1")
-          .set(ld, { display: "none" });
+          .set(ld, { display: "none" })
+          .timeScale(quick ? 1.5 : 1);   // the quick intro plays the same moves faster
       } else { ld.style.display = "none"; intro(); }
     };
-    setTimeout(end, seen ? 250 : 500);
+    setTimeout(end, quick ? 250 : 500);
   }
   (function tick() {
     const el = performance.now() - t0;
@@ -3106,7 +3144,7 @@ fbq('track', 'PageView');
     const cur = parseInt(pct.textContent, 10) || 0;
     const next = Math.min(100, Math.ceil(cur + (target - cur) * .2));
     pct.textContent = String(next).padStart(3, "0");
-    if ((next >= 100 && el > minT) || el > 2500) { pct.textContent = "100"; finishLoader(); return; }
+    if ((next >= 100 && el > minT) || el > maxT) { pct.textContent = "100"; finishLoader(); return; }
     requestAnimationFrame(tick);
   })();
 

@@ -93,18 +93,18 @@ sale: { name: "Black Friday", starts: "2026-11-22T00:00:00+05:30", ends: "2026-1
 
 Black Friday runs from Sunday 22 November, 00:00, until the end of Sunday 29 November, Sri Lanka time. `ends` is midnight at the start of 30 November. `name` is used everywhere the page names the sale: the menu, the hero chip, the ticker, the cart, the WhatsApp order and the sticker on the 3D tag. The day calendar, the start and end times and the countdown all come from `starts` and `ends`.
 
-If you change the dates or the name, also change the few places written out by hand: `22–29 November`, `22–29 Nov` and `8 days only` in the page, `Black` / `Friday` in the sale heading and behind the hero tag, the `validFrom` / `validThrough` dates in the search-engine data, and `img/og-black-friday.jpg`.
+If you change the dates or the name, also change the few places written out by hand: `22–29 November`, `22–29 Nov` and `8 days only` in the page, `Black` / `Friday` in the sale heading and behind the hero tag, the `priceValidUntil` date (the last sale day) in the search-engine data, and `img/og-black-friday.jpg`.
 
 The site switches on its own, by Sri Lanka time:
-- **Before `starts`**: a teaser. A "Black Friday" link in the menu, a countdown chip in the hero, and the sale section after the features strip: the eight sale days, the exact start and end, a countdown, a "Get it first on WhatsApp" button and an "Add to calendar" link. Prices stay at LKR 2,900.
+- **Before `starts`**: a teaser. A "Black Friday" link in the menu, a countdown chip in the hero (with the offer, "Any 2 for Rs. 3,999", so visitors from an ad see it on the first screen), and the sale section after the features strip: the eight sale days, the exact start and end, a countdown, a "Get it first on WhatsApp" button and an "Add to calendar" link. Prices stay at LKR 2,900.
 - **From `starts` until `ends`**: the sale is live. One short costs `one` (Rs. 2,499). Each pair, in any colours and sizes, costs `two` (Rs. 3,999), and an odd one out costs `one`, so three shorts are Rs. 6,498 and four are Rs. 7,998. The cards, hero, product window, cart and WhatsApp order all show the sale price. The WhatsApp message lists the discount so the team can see how the total was worked out. With one short in the bag, the cart suggests adding a second for Rs. 1,500 more. In the sale section, "Build your pair" adds two shorts at once, and the calendar crosses off the days that have passed and fills in today.
 - **After `ends`**: everything goes back to normal and the sale section disappears. The page title, description and search-engine prices switch back too.
 
 ### Search engines and link previews
 For the sale, the top of `index.html` advertises it:
-- **Page title and description** (what Google shows): "Black Friday Sale 22–29 Nov: Gym Shorts 2 for Rs 3,999", with the sale price, the regular price and "up to 31% off".
+- **Page title and description** (what Google shows): "Black Friday Sale Sri Lanka: Gym Shorts 2 for Rs 3,999", and a description with the dates (22–29 November), the sale price, the regular price and "up to 31% off".
 - **Link previews** (WhatsApp, Facebook, Instagram, X): a sale title and description, and the sale picture `img/og-black-friday.jpg`.
-- **Search-engine data**: each pair's offer has the sale price, Rs. 2,499, valid 22–29 November, and the regular Rs. 2,900 as the "strikethrough" price. Google can show the discount in results, and it knows the dates, so it stops showing the sale price after the 29th.
+- **Search-engine data**: each pair's offer has the sale price, Rs. 2,499, with `priceValidUntil` set to the 29th, and the regular Rs. 2,900 as the "strikethrough" price, the way Google asks for sale prices. Google can show the discount in results. Before the 22nd and after the 29th the script swaps in the plain Rs. 2,900, so Google never sees the sale price outside the sale.
 - **The sale section**: the regular price, the sale price, the saving and the percentage, as plain text Google can read.
 
 After publishing, paste `https://www.fidential.shop/` into Facebook's Sharing Debugger (https://developers.facebook.com/tools/debug/) and click **Scrape Again**, so Facebook, Instagram and WhatsApp show the Black Friday preview instead of the old 11.11 one.
@@ -112,17 +112,24 @@ After publishing, paste `https://www.fidential.shop/` into Facebook's Sharing De
 ### After the sale (from 30 November)
 The page switches its title and description back by itself, but link previews read the file directly. Tidy up when convenient:
 1. In the `<head>` of `index.html`, replace the `content` of each tag that has a `data-after` (the title, the description and the `og:` lines) with its `data-after` text, then delete the `data-after` attributes and the sale comment above them.
-2. In the search-engine data, replace each pair's `"priceSpecification": [ … ]` with `"price": "2900",`.
+2. In the search-engine data, change each pair's `"price": "2499"` to `"price": "2900"`, and delete its `"priceValidUntil"` and `"priceSpecification"` lines.
 3. Publish, then refresh the preview in Facebook's Sharing Debugger.
 
 The sale code itself can stay. It does nothing after `ends`, and the next sale only needs new values in `STORE.sale` and the hand-written places above.
 
 To check each state before it happens, open a local or Vercel preview address with `?sale=teaser`, `?sale=live` or `?sale=off` on the end (for example `http://127.0.0.1:5500/index.html?sale=live`). This doesn't work on fidential.shop itself, so customers can't switch the sale on early.
 
+## Running Meta ads (Facebook and Instagram)
+- **Where to send people**: `https://www.fidential.shop/#sale` lands on the Black Friday section, and `#black-panther`, `#blue-sky` or `#shadow-beige` opens the hero on that colour (good for an ad about one pair). Plain `https://www.fidential.shop/` opens on the hero, which shows the offer and the countdown.
+- **URL parameters**: in the ad's *Tracking → URL parameters*, add `utm_source=meta&utm_medium=paid&utm_campaign=black_friday` (change the campaign name per campaign). The site remembers it for 7 days and adds it to the end of the WhatsApp order ("Sent from the FIDENTIAL website (ref: meta · black_friday)"), so you can count which orders came from which ad. Visitors from a plain Facebook or Instagram link show as "ref: facebook · instagram".
+- **Speed**: visitors from an ad, and anyone inside the Facebook or Instagram app, get the short intro, and the page connects to Meta's servers early so the pixel counts landing page views even from people who leave quickly.
+- **Pixel events** (dataset "FIDENTIAL Website"): PageView, ViewContent (a product window opens), AddToCart, InitiateCheckout (the order is sent to WhatsApp, with its value in LKR), Lead ("Get it first on WhatsApp" before the sale) and Contact ("Chat on WhatsApp" in the footer). For a sales campaign, optimise for InitiateCheckout; for a traffic campaign, for landing page views.
+- **Domain verification**: if Events Manager asks you to verify `fidential.shop`, use the DNS TXT option (GoDaddy → DNS → Add New Record, type TXT), the same way as Google Search Console.
+
 ## How checkout works
 The cart runs in three steps:
 1. **Bag**: change quantities or remove items, then "Check out".
-2. **Details**: optional name, phone, city, address and note, plus an order summary. "Send order on WhatsApp" opens `https://wa.me/<number>?text=…` with the order number, items, sizes, quantities, total and any details already written.
+2. **Details**: optional name, phone, city, address and note, plus an order summary. "Send order on WhatsApp" opens `https://wa.me/<number>?text=…` with the order number, items, sizes, quantities, total and any details already written. If the bag changes after an order was sent, the next one gets a new order number.
 3. **Sent**: confirms the order is waiting in WhatsApp, with options to open it again, copy the order text, edit the order or start a new one.
 
 "Buy now" on a product adds it and jumps straight to step 2. The customer taps send in WhatsApp. Delivery charges and payment are confirmed in the chat.
