@@ -70,7 +70,7 @@
       "color": "Black",
       "material": "Scuba fabric",
       "category": "Gym shorts",
-      "image": ["https://www.fidential.shop/img/bp_1.webp", "https://www.fidential.shop/img/bp_2.webp", "https://www.fidential.shop/img/bp_3.webp"],
+      "image": ["https://www.fidential.shop/img/bp_studio_1.webp", "https://www.fidential.shop/img/bp_studio_2.webp", "https://www.fidential.shop/img/bp_studio_3.webp", "https://www.fidential.shop/img/bp_studio_4.webp"],
       "url": "https://www.fidential.shop/#shop",
       "offers": {
         "@type": "Offer",
@@ -95,7 +95,7 @@
       "color": "Blue",
       "material": "Scuba fabric",
       "category": "Gym shorts",
-      "image": ["https://www.fidential.shop/img/bs_1.webp", "https://www.fidential.shop/img/bs_2.webp", "https://www.fidential.shop/img/bs_3.webp"],
+      "image": ["https://www.fidential.shop/img/bs_studio_1.webp", "https://www.fidential.shop/img/bs_studio_2.webp", "https://www.fidential.shop/img/bs_studio_3.webp"],
       "url": "https://www.fidential.shop/#shop",
       "offers": {
         "@type": "Offer",
@@ -120,7 +120,7 @@
       "color": "Black/Beige",
       "material": "Scuba fabric",
       "category": "Gym shorts",
-      "image": ["https://www.fidential.shop/img/sb_1.webp", "https://www.fidential.shop/img/sb_2.webp", "https://www.fidential.shop/img/sb_3.webp"],
+      "image": ["https://www.fidential.shop/img/sb_studio_1.webp", "https://www.fidential.shop/img/sb_studio_2.webp"],
       "url": "https://www.fidential.shop/#shop",
       "offers": {
         "@type": "Offer",
@@ -1186,8 +1186,8 @@ fbq('track', 'PageView');
     <div class="ring-stage" id="ringStage" tabindex="0" role="group" aria-roledescription="carousel" aria-label="Gym floor photos. Drag or use the arrow keys to spin, press Enter to open the pair in front." data-cursor="Drag"><div class="ring" id="ring"></div></div>
     <div class="wrap">
       <div class="ring-cap">
-        <div class="ring-now" aria-live="polite"><span class="mono">Now showing</span><b id="ringName"><i>Black Panther</i></b></div>
-        <div class="ring-meta"><span class="mono" id="ringCount">01 / 06</span><div class="ring-ticks" id="ringTicks"></div></div>
+        <div class="ring-now" aria-live="polite"><span class="mono">Now showing</span><b id="ringName"><i>Blue Sky</i></b></div>
+        <div class="ring-meta"><span class="mono" id="ringCount">01 / 08</span><div class="ring-ticks" id="ringTicks"></div></div>
       </div>
     </div>
   </section>
@@ -1582,7 +1582,9 @@ fbq('track', 'PageView');
         name: "Black Panther", idx: "01", colour: "Black", swatch: "#161616", price: 2900,
         desc: "Classic black with a minimal, sporty look. Premium Scuba fabric, an elastic waistband and an adjustable drawstring.",
         short: "Classic black with a minimal, sporty look.",
-        images: ["img/bp_1.webp", "img/bp_2.webp", "img/bp_3.webp"],
+        // studio photos: the card shows the first (the second on hover), the product window shows them all
+        images: ["img/bp_studio_1.webp", "img/bp_studio_2.webp", "img/bp_studio_3.webp", "img/bp_studio_4.webp"],
+        gym: ["img/bp_gym_1.webp", "img/bp_gym_2.webp"],   // gym photos for the "On the gym floor" album
         hero: "img/bp_hero.webp", depth: "img/bp_depth.webp",   // 3D hang tag photo (cut-out) and its depth map
         stock: { S: 26, M: 5, L: 0 }      // 10 Nov 2026: L sold out (S and M counts from 27 Oct), update as it changes
       },
@@ -1590,7 +1592,8 @@ fbq('track', 'PageView');
         name: "Blue Sky", idx: "02", colour: "Blue", swatch: "#24368e", price: 2900,
         desc: "A distinctive blue with a modern activewear look. Premium Scuba fabric, an elastic waistband and an adjustable drawstring.",
         short: "A distinctive blue with a modern activewear look.",
-        images: ["img/bs_1.webp", "img/bs_2.webp", "img/bs_3.webp"],
+        images: ["img/bs_studio_1.webp", "img/bs_studio_2.webp", "img/bs_studio_3.webp"],
+        gym: ["img/bs_gym_1.webp", "img/bs_gym_2.webp", "img/bs_gym_3.webp", "img/bs_gym_4.webp", "img/bs_gym_5.webp"],
         hero: "img/bs_hero.webp", depth: "img/bs_depth.webp",
         stock: { S: 7, M: 1, L: 0 }
       },
@@ -1599,7 +1602,8 @@ fbq('track', 'PageView');
         name: "Shadow Beige", idx: "03", colour: "Black/Beige", swatch: "#161616", trim: "#d2b8a2", price: 2900, badge: "New",
         desc: "Black with a beige waistband and side panels, a contemporary two-colour design for the gym and every day. Premium Scuba fabric, an elastic waistband and an adjustable drawstring.",
         short: "Black with beige panels, a contemporary two-colour design.",
-        images: ["img/sb_1.webp", "img/sb_2.webp", "img/sb_3.webp"],
+        images: ["img/sb_studio_1.webp", "img/sb_studio_2.webp"],
+        gym: ["img/sb_gym_1.webp"],
         hero: "img/sb_hero.webp", depth: "img/sb_depth.webp",
         stock: { S: 0, M: 19, L: 12 }    // 10 Nov 2026: S sold out
       }
@@ -1799,8 +1803,8 @@ fbq('track', 'PageView');
     art.setAttribute("data-reveal", "");
     art.innerHTML = `
       <button class="card-media" type="button" aria-label="View ${p.name} details" data-cursor="View">
-        <img class="cm-a" src="${p.images[0]}" alt="FIDENTIAL ${p.name} gym shorts in ${p.colour.toLowerCase()}" width="1000" height="1500" loading="lazy" decoding="async">
-        <img class="cm-b" src="${p.images[1] || p.images[0]}" alt="" width="1000" height="1500" loading="lazy" decoding="async">
+        <img class="cm-a" src="${p.images[0]}" alt="FIDENTIAL ${p.name} gym shorts in ${p.colour.toLowerCase()}" width="1000" height="1250" loading="lazy" decoding="async">
+        <img class="cm-b" src="${p.images[1] || p.images[0]}" alt="" width="1000" height="1250" loading="lazy" decoding="async">
       </button>
       <span class="card-tag">${p.idx} · ${p.colour}${p.badge ? `<b>${esc(p.badge)}</b>` : ""}</span>
       <span class="card-sale" data-when="teaser live"><i class="sale-dot"></i><span data-deal="card"></span></span>
@@ -2216,9 +2220,10 @@ fbq('track', 'PageView');
   /* ===== gym floor ring ===== */
   (function ring() {
     const stage = $("#ringStage"), el = $("#ring"), nameEl = $("#ringName"), count = $("#ringCount"), ticks = $("#ringTicks"), live = $(".ring-now");
-    const order = [];
-    const per = Math.max(...IDS.map(id => P[id].images.length));
-    for (let i = 0; i < per; i++) IDS.forEach(id => { if (P[id].images[i]) order.push({ id, i, src: P[id].images[i] }); });
+    // each pair's gym photos, spread evenly round the ring so no colour bunches up
+    const order = IDS.flatMap(id => (P[id].gym || []).map((src, i, a) => ({ id, src, at: (i + .5) / a.length })))
+      .sort((a, b) => a.at - b.at || IDS.indexOf(a.id) - IDS.indexOf(b.id));
+    if (!order.length) { $("#floor").hidden = true; return; }
     // repeat the photos so the ring stays round with only a few of them
     const M = order.length, N = M * Math.max(1, Math.ceil(12 / M)), STEP = 360 / N, DEG = 180 / Math.PI;
     const pad = n => String(n).padStart(2, "0");
@@ -2334,7 +2339,7 @@ fbq('track', 'PageView');
       const c = e.target.closest(".ring-card");
       if (!c) return;
       const k = cards.indexOf(c);
-      if (k === active) openProduct(order[k % M].id, order[k % M].i); else go(k);
+      if (k === active) openProduct(order[k % M].id); else go(k);
     }, true);
     stage.addEventListener("wheel", e => {
       if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
@@ -2345,7 +2350,7 @@ fbq('track', 'PageView');
     }, { passive: false });
     stage.addEventListener("keydown", e => {
       if (e.key === "ArrowRight" || e.key === "ArrowLeft") { e.preventDefault(); target = snap(target) + (e.key === "ArrowRight" ? STEP : -STEP); touch(); }
-      else if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openProduct(order[active % M].id, order[active % M].i); }
+      else if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openProduct(order[active % M].id); }
     });
     stage.addEventListener("focus", () => { target = snap(theta + STEP * .35); touch(); });
     stage.addEventListener("blur", () => touch(1200));
