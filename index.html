@@ -829,9 +829,10 @@ main:focus{outline:none}
 .offer h3{margin:0 0 18px;font-family:var(--f-display);font-weight:400;font-size:clamp(24px,2.3vw,34px);line-height:.95;text-transform:uppercase}
 .offer-was{margin:0;font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
 .offer-was s{position:relative;font-size:15px;letter-spacing:.04em;color:var(--mute);text-decoration:none}
-/* a red line strikes the regular price out as the card comes into view */
-.offer-was s::after{content:"";position:absolute;left:-4px;right:-4px;top:50%;height:2px;margin-top:-1px;background:var(--sale);transform:rotate(-8deg) scaleX(0);transform-origin:0 50%;transition:transform .55s cubic-bezier(.65,0,.35,1) .35s}
-.offer.in .offer-was s::after{transform:rotate(-8deg) scaleX(1)}
+/* a red line strikes the regular price out as the card comes into view. It tilts around its own middle, which sits on the middle
+   of the digits (1px below the middle of the text box), so both ends stay on the number; it draws left to right by unclipping */
+.offer-was s::after{content:"";position:absolute;left:-3px;right:-3px;top:calc(50% + 1px);height:2px;margin-top:-1px;background:var(--sale);transform:rotate(-4deg);transform-origin:50% 50%;clip-path:inset(0 100% 0 0);transition:clip-path .55s cubic-bezier(.65,0,.35,1) .35s}
+.offer.in .offer-was s::after{clip-path:inset(0)}
 .offer-now{margin:0;display:grid;gap:6px;justify-items:start;font-family:var(--f-display);font-size:clamp(34px,3.6vw,56px);line-height:.9;white-space:nowrap}
 /* "Rs. 3,999" is 5.1em wide, so 18.5cqi keeps the price on one line inside its card */
 @supports (font-size:1cqi){.offer-now{font-size:clamp(34px,18.5cqi,64px)}}
