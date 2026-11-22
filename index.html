@@ -1169,7 +1169,7 @@ fbq('track', 'PageView');
           <li><span class="k">Waist</span><span class="v">Elastic waistband</span></li>
           <li><span class="k">Fit</span><span class="v">Adjustable drawstring</span></li>
           <li><span class="k">Sizes</span><span class="v">S · M · L</span></li>
-          <li><span class="k">Price</span><span class="v">LKR 2,900</span></li>
+          <li><span class="k">Price</span><span class="v" data-price="black-panther">LKR 2,900</span></li>
         </ul>
       </div>
     </div>
@@ -2838,8 +2838,10 @@ fbq('track', 'PageView');
   $("#yr").textContent = new Date().getFullYear();
 
   /* ===== example WhatsApp bubble ===== */
+  // the example order uses the first two pairs, each in a size that's in stock (M where it can), so it never shows a sold-out size
+  const sampleSize = id => ["M", ...SIZES].find(s => (P[id].stock[s] ?? 0) > 0) || "M";
   function paintBubble() {
-    $("#bubble").innerHTML = buildMessage([{ id: "black-panther", size: "M", qty: 1 }, { id: "blue-sky", size: "S", qty: 1 }])
+    $("#bubble").innerHTML = buildMessage([IDS[0], IDS[1] || IDS[0]].map(id => ({ id, size: sampleSize(id), qty: 1 })))
       .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/\*(.+?)\*/g, "<b>$1</b>") + "<small>12:41 ✓✓</small>";
   }
   paintBubble();
